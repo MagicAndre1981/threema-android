@@ -249,6 +249,8 @@
     <string name="prefs_header_other">Weitere</string>
     <string name="an_error_occurred">Es ist ein Fehler aufgetreten</string>
     <string name="an_error_occurred_more">Es ist ein Fehler aufgetreten: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">${app_name_short} konnte aufgrund eines unerwarteten Fehlers nicht geöffnet werden. Bitte exportieren Sie die Logdatei und kontaktieren Sie unser Support-Team, damit wir das Problem untersuchen können. Wir entschuldigen uns für die Unannehmlichkeiten.</string>
     <string name="acknowledge">Bestätigen</string>
     <string name="decline">Ablehnen</string>
     <string name="forward_message">Weiterleiten</string>

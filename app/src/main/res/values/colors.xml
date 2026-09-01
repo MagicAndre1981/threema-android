@@ -80,6 +80,15 @@
     <color name="mention_text_color">@color/md_theme_light_onBackground</color>
     <color name="mention_text_color_inverted">@color/md_theme_light_background</color>
 
+    <!-- Home Screen Widget -->
+    <!-- We need to define them here, as a remote view cannot resolve ?attr/ references -->
+    <color name="widget_color_primary">@color/md_theme_light_primary</color>
+    <color name="widget_color_on_primary">@color/md_theme_light_onPrimary</color>
+    <color name="widget_color_surface_container_low">@color/md_theme_light_surfaceContainerLow</color>
+    <color name="widget_color_on_surface">@color/md_theme_light_onSurface</color>
+    <color name="widget_color_background">@color/md_theme_light_background</color>
+    <color name="widget_color_on_background">@color/md_theme_light_onBackground</color>
+
     <!-- others -->
     <color name="text_color_open_polls">#656565</color>
     <color name="markup_marker_color">#FFD3D3D3</color>

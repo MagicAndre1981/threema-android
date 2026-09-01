@@ -33,7 +33,7 @@
     <string name="title_department">Відділ</string>
     <string name="send">Надіслати</string>
     <string name="prefs_linked_devices">Зв\'язані пристрої</string>
-    <string name="prefs_community_and_sharing">Спільнота та спільне використання</string>
+    <string name="prefs_community_and_sharing">Спільнота й посилання</string>
     <!-- Title of section on "Settings" screen, for advanced settings -->
     <string name="prefs_advanced">Розширені налаштування</string>
     <!-- Title of section on "Settings" screen, for information and other options about the app -->
@@ -247,6 +247,8 @@
     <string name="prefs_header_other">Інше</string>
     <string name="an_error_occurred">Сталася помилка</string>
     <string name="an_error_occurred_more">Сталася помилка: \"%1$s\"</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">${app_name_short} не вдалося відкрити через неочікувану помилку. Експортуйте файл журналу нижче та зв\'яжіться з нашою командою підтримки, щоб ми дослідили проблему. Перепрошуємо за незручності.</string>
     <string name="acknowledge">Погоджуюся</string>
     <string name="decline">Не погоджуюся</string>
     <string name="forward_message">Переслати повідомлення</string>
@@ -638,9 +640,9 @@
     <string name="no_app_for_location">На цьому пристрої не знайдено додаток для карт</string>
     <string name="prefs_sendlog">Надіслати журнал</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
-    <string name="prefs_sendlog_summary">Надішліть файл журналу в ${company_name} для аналізу несправності</string>
+    <string name="prefs_sendlog_summary">Надіслати файл журналу в ${company_name} для аналізу несправності</string>
     <string name="prefs_exportlog">Експортувати журнал</string>
-    <string name="prefs_exportlog_summary">Поділіться файлом журналу в іншому додатку</string>
+    <string name="prefs_exportlog_summary">Поділитися файлом журналу в іншому додатку</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="permission_storage_required">Щоб зберігати та надсилати медіафайли, надайте ${app_name} доступ до сховища.</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->

@@ -104,4 +104,6 @@ interface GroupCallController {
      */
     @WorkerThread
     fun purgeCallParticipants(groupMembers: Set<String>)
+
+    class CallAlreadyEndedException : Exception()
 }

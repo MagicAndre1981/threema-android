@@ -1,5 +1,6 @@
 package ch.threema.app.shortcuts
 
+import android.os.DeadObjectException
 import ch.threema.app.di.injectNullableNonBinding
 import ch.threema.app.eventbus.GlobalEventFlows
 import ch.threema.app.eventbus.events.ContactEvent
@@ -12,6 +13,7 @@ import ch.threema.app.services.ContactService
 import ch.threema.app.services.DistributionListService
 import ch.threema.app.services.GroupService
 import ch.threema.app.utils.ShortcutUtil
+import ch.threema.base.utils.getThreemaLogger
 import ch.threema.data.datatypes.GroupIdentity
 import ch.threema.domain.types.Identity
 import ch.threema.storage.models.AbstractMessageModel
@@ -20,12 +22,14 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
+private val logger = getThreemaLogger("ShortcutsUpdaterMonitor")
+
 // TODO(ANDR-4705): Refactor or wrap ShortcutUtil to make it injectable and ensure that updatePinnedShortcut is only called from here.
 //  Once that is done, we should write unit tests for this class.
 class ShortcutsUpdaterMonitor(
     private val globalEventFlows: GlobalEventFlows,
     private val preferenceService: PreferenceService,
-) : Monitor("ShortcutsMonitor"), KoinComponent {
+) : Monitor("ShortcutsUpdaterMonitor"), KoinComponent {
     private val contactService: ContactService? by injectNullableNonBinding()
     private val groupService: GroupService? by injectNullableNonBinding()
     private val distributionListService: DistributionListService? by injectNullableNonBinding()
@@ -101,10 +105,15 @@ class ShortcutsUpdaterMonitor(
     private fun updateShareTargetShortcuts(
         receiver: MessageReceiver<out AbstractMessageModel>,
     ) {
-        ShortcutUtil.updateShareTargetShortcut(
-            receiver,
-            preferenceService.getContactNameFormat(),
-        )
+        try {
+            ShortcutUtil.updateShareTargetShortcut(
+                receiver,
+                preferenceService.getContactNameFormat(),
+            )
+        } catch (e: DeadObjectException) {
+            // DeadObjectException is expected to occur occasionally and there is nothing we can do about it
+            logger.warn("Failed to update shortcuts", e)
+        }
     }
 
     private fun updatePinnedShortcuts(

@@ -229,6 +229,7 @@
     <string name="prefs_header_other">Inne</string>
     <string name="an_error_occurred">Wystąpił błąd</string>
     <string name="an_error_occurred_more">Wystąpił błąd: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Potwierdź</string>
     <string name="decline">Nie zgadzam się</string>
     <string name="forward_message">Prześlij wiadomość</string>

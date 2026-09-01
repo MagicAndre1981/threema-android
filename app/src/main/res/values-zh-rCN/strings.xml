@@ -243,6 +243,8 @@
     <string name="prefs_header_other">其他</string>
     <string name="an_error_occurred">发生错误</string>
     <string name="an_error_occurred_more">发生错误：%1$s</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">由于发生意外错误，无法打开 ${app_name_short}。请导出以下的日志文​​件，并联系我们的支持团队，以便我们调查此问题。由此给您带来的不便，我们深表歉意。</string>
     <string name="acknowledge">同意</string>
     <string name="decline">不同意</string>
     <string name="forward_message">转发消息</string>

@@ -7,6 +7,8 @@ import ch.threema.android.buildPeriodicWorkRequest
 import ch.threema.android.setConstraints
 import ch.threema.android.setInitialDelay
 import ch.threema.android.setInputData
+import ch.threema.android.showToast
+import ch.threema.app.R
 import ch.threema.app.di.awaitAppFullyReadyWithTimeout
 import ch.threema.app.managers.ListenerManager
 import ch.threema.app.preference.service.PreferenceService
@@ -25,7 +27,7 @@ import org.koin.core.component.inject
 private val logger = getThreemaLogger("ThreemaSafeUploadWorker")
 
 class ThreemaSafeUploadWorker(
-    context: Context,
+    private val context: Context,
     workerParameters: WorkerParameters,
 ) : CoroutineWorker(context, workerParameters), KoinComponent {
 
@@ -52,6 +54,9 @@ class ThreemaSafeUploadWorker(
             // When the backup has been successfully uploaded or does not need to be uploaded, then
             // we ignore previous errors.
             preferenceService.setThreemaSafeErrorTimestamp(null)
+            if (forceUpdate) {
+                context.showToast(R.string.threema_safe_upload_successful)
+            }
         } catch (e: ThreemaSafeService.ThreemaSafeUploadException) {
             if (preferenceService.getThreemaSafeErrorTimestamp() == null && e.isUploadNeeded) {
                 preferenceService.setThreemaSafeErrorTimestamp(Instant.now())
@@ -92,10 +97,10 @@ class ThreemaSafeUploadWorker(
          * Build a one time work request without any initial delay.
          */
         @JvmStatic
-        fun buildWorkRequest(forceUpdate: Boolean): OneTimeWorkRequest =
+        fun buildRunNowWorkRequest(): OneTimeWorkRequest =
             buildOneTimeWorkRequest<ThreemaSafeUploadWorker> {
                 setInputData {
-                    putBoolean(EXTRA_FORCE_UPDATE, forceUpdate)
+                    putBoolean(EXTRA_FORCE_UPDATE, true)
                 }
             }
 
@@ -105,7 +110,7 @@ class ThreemaSafeUploadWorker(
          * schedule period is not added as tag, as these period does not change dynamically.
          */
         @JvmStatic
-        fun buildWorkRequest(schedulePeriodMs: Long): PeriodicWorkRequest =
+        fun buildPeriodicWorkRequest(schedulePeriodMs: Long): PeriodicWorkRequest =
             buildPeriodicWorkRequest<ThreemaSafeUploadWorker>(
                 repeatInterval = schedulePeriodMs.milliseconds,
             ) {

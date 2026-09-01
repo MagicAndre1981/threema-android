@@ -102,12 +102,8 @@ public interface ThreemaSafeService {
      * Create a one time work request to create and upload a Threema Safe backup. This method
      * cancels already enqueued one time work requests. If a periodic work request is scheduled, it
      * gets rescheduled, so that the schedule period is still met.
-     *
-     * @param force If set to {@code true}, the backup is created even if the last backup was
-     *              created within the last 24 hours or there are no new changes since the last
-     *              backup. See {@link #createBackup(boolean)} for more details.
      */
-    void uploadNow(boolean force);
+    void uploadNow();
 
     /**
      * Create and upload a Threema Safe backup.

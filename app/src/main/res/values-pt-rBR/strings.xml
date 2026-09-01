@@ -229,6 +229,7 @@
     <string name="prefs_header_other">Outros</string>
     <string name="an_error_occurred">Ocorreu um erro</string>
     <string name="an_error_occurred_more">Ocorreu um erro: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Concordar</string>
     <string name="decline">Discordar</string>
     <string name="forward_message">Encaminhar mensagem</string>

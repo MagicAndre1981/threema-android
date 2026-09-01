@@ -28,7 +28,7 @@ class ErrorReportDetailsProviderTest {
             sentryServiceMetaInfo = SentryService.MetaInfo(
                 deviceModel = "Testing",
                 androidSdkVersion = 35,
-                appVersion = "9.9.9",
+                release = "9.9.9",
                 versionCode = 9,
                 buildFlavor = "TEST",
             ),
@@ -37,7 +37,7 @@ class ErrorReportDetailsProviderTest {
 
         assertEquals(
             """
-                MetaInfo(deviceModel=Testing, androidSdkVersion=35, appVersion=9.9.9, versionCode=9, buildFlavor=TEST)
+                MetaInfo(deviceModel=Testing, androidSdkVersion=35, release=9.9.9, versionCode=9, buildFlavor=TEST)
 
                 Crash
                 java.langRuntimeException: This is a test

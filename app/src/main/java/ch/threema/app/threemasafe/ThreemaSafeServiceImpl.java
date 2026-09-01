@@ -4,12 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.hardware.display.DisplayManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.view.Display;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import ch.threema.app.preference.service.SynchronizedSettingsService;
 import ch.threema.app.protocolsteps.ValidContactsLookupSteps;
@@ -53,7 +49,6 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import ch.threema.app.BuildConfig;
 import ch.threema.app.R;
-import ch.threema.app.ThreemaApplication;
 import ch.threema.app.asynctasks.AddContactRestrictionPolicy;
 import ch.threema.app.asynctasks.BasicAddOrUpdateContactBackgroundTask;
 import ch.threema.app.asynctasks.ContactAvailable;
@@ -73,7 +68,6 @@ import ch.threema.app.services.UserService;
 import ch.threema.app.utils.BitmapUtil;
 import ch.threema.app.utils.ConfigUtils;
 import ch.threema.app.utils.GzipOutputStream;
-import ch.threema.app.utils.RuntimeUtil;
 import ch.threema.app.utils.WorkManagerUtil;
 import ch.threema.app.workers.ThreemaSafeUploadWorker;
 import ch.threema.app.workers.WorkerNames;
@@ -113,7 +107,6 @@ import ch.threema.storage.models.group.GroupMemberModel;
 import ch.threema.storage.models.group.GroupModelOld;
 import okhttp3.OkHttpClient;
 
-import static android.view.Display.DEFAULT_DISPLAY;
 import static ch.threema.app.preference.service.PreferenceService.PROFILEPIC_RELEASE_EVERYONE;
 import static ch.threema.app.preference.service.PreferenceService.PROFILEPIC_RELEASE_NOBODY;
 import static ch.threema.app.preference.service.PreferenceService.PROFILEPIC_RELEASE_ALLOW_LIST;
@@ -382,7 +375,7 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
     @Override
     public boolean schedulePeriodicUpload() {
         logger.info("Scheduling Threema Safe upload");
-        WorkManager workManager = WorkManager.getInstance(ThreemaApplication.getAppContext());
+        WorkManager workManager = WorkManager.getInstance(context);
         boolean reschedule = WorkManagerUtil.shouldScheduleNewWorkManagerInstance(
             workManager,
             WorkerNames.WORKER_PERIODIC_THREEMA_SAFE_UPLOAD,
@@ -401,7 +394,7 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
     public void unschedulePeriodicUpload() {
         logger.info("Unscheduling Threema Safe upload");
 
-        WorkManager workManager = WorkManager.getInstance(ThreemaApplication.getAppContext());
+        WorkManager workManager = WorkManager.getInstance(context);
         workManager.cancelUniqueWork(WorkerNames.WORKER_PERIODIC_THREEMA_SAFE_UPLOAD);
     }
 
@@ -428,9 +421,9 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
     }
 
     @Override
-    public void uploadNow(boolean force) {
+    public void uploadNow() {
         try {
-            WorkManager workManager = WorkManager.getInstance(ThreemaApplication.getAppContext());
+            WorkManager workManager = WorkManager.getInstance(context);
 
             // If the periodic safe upload is scheduled, we can reschedule it so that it does not
             // get executed within the next schedule period.
@@ -439,7 +432,7 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
             }
 
             // Upload the threema safe once
-            OneTimeWorkRequest workRequest = ThreemaSafeUploadWorker.buildWorkRequest(force);
+            OneTimeWorkRequest workRequest = ThreemaSafeUploadWorker.buildRunNowWorkRequest();
             workManager.enqueueUniqueWork(WorkerNames.WORKER_THREEMA_SAFE_UPLOAD, ExistingWorkPolicy.REPLACE, workRequest);
         } catch (IllegalStateException e) {
             logger.error("Unable to schedule safe upload one time work", e);
@@ -544,24 +537,6 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
             throw new ThreemaSafeUploadException("Upload failed", true);
         }
 
-        if (force) {
-            RuntimeUtil.runOnUiThread(() -> {
-                Context windowContext = context;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                    final DisplayManager dm;
-                    dm = context.getSystemService(DisplayManager.class);
-                    final Display primaryDisplay = dm.getDisplay(DEFAULT_DISPLAY);
-                    try {
-                        windowContext = context.createDisplayContext(primaryDisplay)
-                            .createWindowContext(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, null);
-                    } catch (SecurityException e) {
-                        logger.error("Unable to create WindowContext for Toast", e);
-                    }
-                }
-                Toast.makeText(windowContext, R.string.threema_safe_upload_successful, Toast.LENGTH_LONG).show();
-            });
-        }
-
         // This is only required as for some users the default server name has been stored in the
         // preferences. Default server names should not be stored in preferences as they prevent us
         // from changing the default server name easily.
@@ -637,8 +612,8 @@ public class ThreemaSafeServiceImpl implements ThreemaSafeService {
 
             try {
                 // Schedule the start of the worker every 24 hours
-                WorkManager workManager = WorkManager.getInstance(ThreemaApplication.getAppContext());
-                PeriodicWorkRequest workRequest = ThreemaSafeUploadWorker.buildWorkRequest(SCHEDULE_PERIOD);
+                WorkManager workManager = WorkManager.getInstance(context);
+                PeriodicWorkRequest workRequest = ThreemaSafeUploadWorker.buildPeriodicWorkRequest(SCHEDULE_PERIOD);
                 workManager.enqueueUniquePeriodicWork(
                     WorkerNames.WORKER_PERIODIC_THREEMA_SAFE_UPLOAD,
                     policy,

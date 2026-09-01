@@ -15,6 +15,7 @@ import ch.threema.app.R
 import ch.threema.app.ThreemaApplication
 import ch.threema.app.activities.directory.DirectoryActivity
 import ch.threema.app.adapters.UserListAdapter
+import ch.threema.app.di.awaitAppFullyReady
 import ch.threema.app.preference.service.PreferenceService
 import ch.threema.app.services.BlockedIdentitiesService
 import ch.threema.app.services.ContactService
@@ -43,17 +44,11 @@ class WorkUserListFragment : RecipientListFragment() {
     private val preferenceService: PreferenceService by inject()
     private val dispatcherProvider: DispatcherProvider by inject()
 
-    override fun isMultiSelectAllowed(): Boolean = multiSelect || multiSelectIdentity
+    override fun isMultiSelectAllowed() = multiSelect || multiSelectIdentity
 
-    override fun getBundleName(): String = "WorkerUserListState"
+    override fun getBundleName() = "WorkerUserListState"
 
-    override fun getEmptyText(): Int = R.string.no_matching_work_contacts
-
-    override fun getAddIcon(): Int = 0
-
-    override fun getAddText(): Int = 0
-
-    override fun getAddIntent(): Intent? = null
+    override fun getEmptyText() = R.string.no_matching_work_contacts
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
@@ -87,6 +82,8 @@ class WorkUserListFragment : RecipientListFragment() {
     @SuppressLint("StaticFieldLeak")
     override fun createListAdapter(checkedItemPositions: ArrayList<Int>?) {
         lifecycleScope.launch {
+            awaitAppFullyReady()
+
             val contactModels = withContext(dispatcherProvider.worker) {
                 contactService.find(
                     object : ContactService.Filter {

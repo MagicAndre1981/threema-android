@@ -32,7 +32,7 @@ val errorReportingModule = module {
     factory {
         SentryService.MetaInfo(
             androidSdkVersion = Build.VERSION.SDK_INT,
-            appVersion = BuildConfig.VERSION_NAME,
+            release = "threema-android@${BuildConfig.BASE_VERSION_NAME}${BuildConfig.VERSION_NAME_BETA_SUFFIX}",
             versionCode = BuildConfig.DEFAULT_VERSION_CODE,
             buildFlavor = BuildFlavor.current.fullDisplayName,
             deviceModel = Build.MODEL,

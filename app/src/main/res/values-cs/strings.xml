@@ -238,6 +238,8 @@
     <string name="prefs_header_other">Ostatní</string>
     <string name="an_error_occurred">Došlo k chybě</string>
     <string name="an_error_occurred_more">Došlo k chybě: „%1$s“</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">Aplikaci ${app_name_short} se nezdařilo otevřít z důvodu neočekávané chyby. Exportujte prosím níže uvedený záznam a kontaktujte naši podporu, abychom mohli vzniklé potíže prošetřit. Za vzniklé nepříjemnosti se omlouváme.</string>
     <string name="acknowledge">Souhlasím</string>
     <string name="decline">Nesouhlasím</string>
     <string name="forward_message">Přeposlat zprávu</string>

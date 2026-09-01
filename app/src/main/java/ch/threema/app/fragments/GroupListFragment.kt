@@ -4,6 +4,7 @@ import androidx.lifecycle.lifecycleScope
 import ch.threema.app.R
 import ch.threema.app.activities.GroupAddActivity
 import ch.threema.app.adapters.GroupListAdapter
+import ch.threema.app.di.awaitAppFullyReady
 import ch.threema.app.preference.service.PreferenceService
 import ch.threema.app.services.GroupService
 import ch.threema.app.services.GroupService.GroupFilter
@@ -29,8 +30,10 @@ class GroupListFragment : RecipientListFragment() {
 
     override fun getAddIntent() = GroupAddActivity.createIntent(requireContext())
 
-    override fun createListAdapter(checkedItemPositions: ArrayList<Int?>?) {
+    override fun createListAdapter(checkedItemPositions: ArrayList<Int>?) {
         lifecycleScope.launch {
+            awaitAppFullyReady()
+
             val groupModels = withContext(dispatcherProvider.io) {
                 groupService.getAll(
                     object : GroupFilter {

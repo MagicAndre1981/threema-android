@@ -50,8 +50,6 @@ class SettingsAppearanceFragment : ThreemaPreferenceFragment() {
     )
 
     override fun initializePreferences() {
-        super.initializePreferences()
-
         this.showBadge = getPrefOrNull(R.string.preferences__show_unread_badge)
         this.showBadgeChecked = this.showBadge?.isChecked ?: false
 

@@ -780,6 +780,7 @@
             android:name=".camera.CameraActivity"
             android:autoRemoveFromRecents="true"
             android:clearTaskOnLaunch="true"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.Threema.Camera">
             <!-- Declare Huawei notch support -->
             <meta-data

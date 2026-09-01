@@ -20,8 +20,8 @@ class ConversationNotificationConverter(
     private val groupService: GroupService? by injectNullableNonBinding()
     private val conversationCategoryService: ConversationCategoryService? by injectNullableNonBinding()
 
-    fun convert(message: AbstractMessageModel): ConversationNotification? {
-        return ConversationNotificationUtil.convert(
+    fun convert(message: AbstractMessageModel): ConversationNotification? =
+        ConversationNotificationUtil.convert(
             appContext,
             message,
             contactService ?: return null,
@@ -29,5 +29,4 @@ class ConversationNotificationConverter(
             conversationCategoryService ?: return null,
             preferenceService.getContactNameFormat(),
         )
-    }
 }

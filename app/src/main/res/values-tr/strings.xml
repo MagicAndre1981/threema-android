@@ -239,6 +239,8 @@ tekrar denemeden önce girdiğiniz numaranın doğru olduğundan ve mobil ağa b
     <string name="prefs_header_other">Diğer</string>
     <string name="an_error_occurred">Hata oluştu</string>
     <string name="an_error_occurred_more">Hata oluştu: “%1$s”</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">Beklenmedik bir hata nedeniyle ${app_name_short} açılamadı. Sorunu inceleyebilmemiz için lütfen aşağıdaki günlük dosyasını dışa aktarın ve destek ekibimizle iletişime geçin. Yaşanan aksaklık için özür dileriz.</string>
     <string name="acknowledge">Kabul et</string>
     <string name="decline">Kabul etme</string>
     <string name="forward_message">İlet</string>
@@ -397,7 +399,8 @@ ${app_name_short} uygulamasında silerseniz, kişi senkronizasyonundan sonra tek
     <string name="block_contact">Engelle</string>
     <string name="unblock_contact">Engeli kaldır</string>
     <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
-    <string name="add_acount_from_within_threema">${app_name_short} uygulamasının içinden ${app_name_short} ID\'nizi yönetin.</string>
+    <string name="add_acount_from_within_threema">
+${app_name_short} uygulamasının içinden ${app_name_short} ID\'nizi yönetin.</string>
     <string name="share_image">Resmi paylaş</string>
     <string name="view_in_gallery">Galeride görüntüle</string>
     <string name="token_register_failed">Push token güncellenemedi, lütfen daha sonra tekrar deneyin.</string>
@@ -1743,7 +1746,8 @@ sunucularımıza güvenli bir şekilde iletildi. Kişisel anahtar hiçbir zaman 
     <string name="referral_banner_body">Arkadaşlarınızı şirketlerinde Threema Work\'ü kullanmaya davet edin ve yönlendirme bonusu kazanın!</string>
     <string name="referral_screen_title">Tavsiye Edin ve Faydalanın</string>
     <string name="referral_screen_subtitle">ilk şirketin ilk fatura tutarının %10\'una kadar komisyon kazanın.</string>
-    <string name="referral_how_it_works_title">Nasıl Çalışır?</string>
+    <string name="referral_how_it_works_title">
+Nasıl Çalışır?</string>
     <string name="referral_how_it_works_referral_title">Yönlendirme</string>
     <string name="referral_how_it_works_referral_body">Bir arkadaşınızı veya şirketini Threema Work\'e katılmaya davet edin. Referansınızın dikkate alınabilmesi için kayıt sırasında veya lisans satın alırken Threema kimliğinizi belirtmeniz önemlidir.</string>
     <string name="referral_how_it_works_requirements_title">Gereksinimler</string>

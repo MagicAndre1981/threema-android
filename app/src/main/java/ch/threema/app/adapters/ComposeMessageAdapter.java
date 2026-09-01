@@ -1180,7 +1180,12 @@ public class ComposeMessageAdapter extends ArrayAdapter<AbstractMessageModel> im
                 int n = 0;
                 final int targetSize = targetMessageModels.size();
                 final int firstVisiblePosition = listView.getFirstVisiblePosition();
-                for (int i = firstVisiblePosition, j = listView.getLastVisiblePosition(); i <= j; i++) {
+                // The visible positions are based on the last layout pass and may point beyond the
+                // current item count if the list has shrunk since (e.g. after emptying the chat).
+                // Accessing such a position would throw an IndexOutOfBoundsException, so clamp the
+                // range to the current count.
+                final int lastValidPosition = Math.min(listView.getLastVisiblePosition(), listView.getCount() - 1);
+                for (int i = firstVisiblePosition; i <= lastValidPosition; i++) {
                     AbstractMessageModel messageModel = (AbstractMessageModel) listView.getItemAtPosition(i);
                     if (messageModel != null) {
                         for (AbstractMessageModel targetMessageModel : targetMessageModels) {

@@ -383,7 +383,9 @@ public class WizardBaseActivity extends ThreemaAppCompatActivity implements
 
     @Override
     protected void onDestroy() {
-        viewPager.removeOnPageChangeListener(this);
+        if (viewPager != null) {
+            viewPager.removeOnPageChangeListener(this);
+        }
 
         super.onDestroy();
     }
@@ -1060,7 +1062,7 @@ public class WizardBaseActivity extends ThreemaAppCompatActivity implements
                         dependencies.getThreemaSafeService().storeMasterKey(masterKey);
                         dependencies.getPreferenceService().setThreemaSafeServerInfo(safeServerInfo);
                         dependencies.getThreemaSafeService().setEnabled(true);
-                        dependencies.getThreemaSafeService().uploadNow(true);
+                        dependencies.getThreemaSafeService().uploadNow();
                     } else {
                         Toast.makeText(WizardBaseActivity.this, R.string.safe_error_preparing, Toast.LENGTH_LONG).show();
                     }

@@ -238,6 +238,8 @@
     <string name="prefs_header_other">Другое</string>
     <string name="an_error_occurred">Произошла ошибка</string>
     <string name="an_error_occurred_more">Произошла ошибка: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">Невозможно запустить ${app_name_short} из-за непредвиденной ошибки.  Экспортируйте файл журнала ниже и свяжитесь с нашей службой поддержки, чтобы мы смогли разобраться в проблеме. Приносим извинения за неудобства.</string>
     <string name="acknowledge">Согласие</string>
     <string name="decline">Несогласие</string>
     <string name="forward_message">Переслать сообщение</string>

@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
@@ -197,7 +198,7 @@ class VoiceRecorderViewModel(
             mediaRecorder?.let { recorder ->
                 recorder.stop()
                 logger.info("Stopped recording to {} with {}", audioOutputFile, recorder)
-                if (audioOutputFile?.exists() != true) {
+                if (audioOutputFile != null && !audioOutputFile.exists()) {
                     logger.logAndReportError("Output file does not exist after stopping recording")
                 }
             }
@@ -205,11 +206,15 @@ class VoiceRecorderViewModel(
             logger.error("Exception while stopping recording", e)
         }
         releaseMediaRecorder()
-        _state.value = _state.value.copy(
-            mediaState = MediaState.FinishedRecording(
-                file = audioOutputFile!!,
-            ),
-        )
+        if (audioOutputFile != null) {
+            _state.update { previousState ->
+                previousState.copy(
+                    mediaState = MediaState.FinishedRecording(
+                        file = audioOutputFile,
+                    ),
+                )
+            }
+        }
     }
 
     fun startPlayback() {
@@ -415,11 +420,17 @@ class VoiceRecorderViewModel(
             logger.error("File was not found")
             return Duration.ZERO
         }
-        val durationCheckMediaPlayer: MediaPlayer = MediaPlayer.create(appContext, file.toUri())
-            ?: run {
-                logger.warn("Unable to create a media player for checking size")
-                return Duration.ZERO
-            }
+        val durationCheckMediaPlayer: MediaPlayer = try {
+            MediaPlayer.create(appContext, file.toUri())
+                ?: run {
+                    logger.warn("Unable to create a media player for checking size")
+                    return Duration.ZERO
+                }
+        } catch (e: IllegalStateException) {
+            logger.error("Failed to create media player to check duration", e)
+            return Duration.ZERO
+        }
+
         val durationMs = durationCheckMediaPlayer.duration
         durationCheckMediaPlayer.release()
         logger.info("Duration in ms {}", durationMs)

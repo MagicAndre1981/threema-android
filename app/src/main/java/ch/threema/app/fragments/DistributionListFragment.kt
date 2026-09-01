@@ -4,6 +4,7 @@ import androidx.lifecycle.lifecycleScope
 import ch.threema.app.R
 import ch.threema.app.activities.DistributionListAddActivity
 import ch.threema.app.adapters.DistributionListAdapter
+import ch.threema.app.di.awaitAppFullyReady
 import ch.threema.app.preference.service.PreferenceService
 import ch.threema.app.services.DistributionListService
 import ch.threema.common.DispatcherProvider
@@ -28,8 +29,10 @@ class DistributionListFragment : RecipientListFragment() {
 
     override fun getAddIntent() = DistributionListAddActivity.createIntent(requireContext())
 
-    override fun createListAdapter(checkedItemPositions: ArrayList<Int?>?) {
+    override fun createListAdapter(checkedItemPositions: ArrayList<Int>?) {
         lifecycleScope.launch {
+            awaitAppFullyReady()
+
             val distributionListModels = withContext(dispatcherProvider.io) {
                 distributionListService.getAll(
                     object : DistributionListService.DistributionListFilter {

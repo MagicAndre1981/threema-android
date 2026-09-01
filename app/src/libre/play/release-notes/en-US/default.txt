@@ -1,2 +1,2 @@
-- Support for emoji version 17.0
+- Fixed a bug that occurred when rotating the smartphone while using Threema’s camera
 - Various improvements and bug fixes

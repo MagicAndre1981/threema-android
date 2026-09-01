@@ -231,6 +231,7 @@
     <string name="prefs_header_other">Іншае</string>
     <string name="an_error_occurred">Адбылася памылка</string>
     <string name="an_error_occurred_more">Адбылася памылка: \"%1$s\"</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Згодзен</string>
     <string name="decline">Не згодны</string>
     <string name="forward_message">Пераслаць паведамленне</string>
@@ -1114,7 +1115,8 @@
     <string name="continue_recording">Працягнуць запіс</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". %1$s is a placeholder for the version number. They must not be translated. -->
     <string name="whatsnew_title">Што новага ў ${app_name} %1$s?</string>
-    <string name="whatsnew_headline"><![CDATA[<p>Цяпер вы можаце прывязаць сваю Android-прыладу да новай праграмы для ПК (бэта) і пратэставаць функцыю працы на некалькіх прыладах.</p>
+    <string name="whatsnew_headline"><![CDATA[
+<p>Цяпер вы можаце прывязаць сваю Android-прыладу да новай праграмы для ПК (бэта) і пратэставаць функцыю працы на некалькіх прыладах.</p>
         <p>Каб даведацца больш, перайдзіце ў «Меню > Threema 2.0 для ПК (Бэта)».</p>        ]]></string>
     <string name="tap_to_start">Націсніце тут, каб запусціць %s.</string>
     <string name="notification_title_restart">Патрабуецца перазапуск</string>

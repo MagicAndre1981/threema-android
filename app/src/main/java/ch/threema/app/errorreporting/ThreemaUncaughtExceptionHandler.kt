@@ -1,6 +1,7 @@
 package ch.threema.app.errorreporting
 
 import android.content.Context
+import android.os.DeadObjectException
 import ch.threema.app.BuildConfig
 import ch.threema.common.TimeProvider
 import ch.threema.common.UUIDGenerator
@@ -14,12 +15,18 @@ class ThreemaUncaughtExceptionHandler(
     override fun uncaughtException(t: Thread, e: Throwable) {
         UncaughtExceptionsLogger.logUnhandledException(e)
 
-        @Suppress("KotlinConstantConditions")
-        if (BuildConfig.ERROR_REPORTING_SUPPORTED) {
+        if (shouldCreateErrorReport(e)) {
             storeExceptionForErrorReporting(e)
         }
 
         defaultHandler?.uncaughtException(t, e)
+    }
+
+    private fun shouldCreateErrorReport(e: Throwable): Boolean {
+        if (!BuildConfig.ERROR_REPORTING_SUPPORTED) {
+            return false
+        }
+        return e !is DeadObjectException && e.cause !is DeadObjectException
     }
 
     private fun storeExceptionForErrorReporting(e: Throwable) {

@@ -22,6 +22,7 @@
     <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="enter_id_hint">Въведете ${app_name_short} идентификатор</string>
     <string name="account_links">Свързани акаунти</string>
+    <string name="title_set_availability_status">Достъпност</string>
     <string name="menu_settings">Настройки</string>
     <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
     <string name="menu_about">За ${app_name}</string>
@@ -31,8 +32,12 @@
     <string name="title_job_title">Длъжност</string>
     <string name="title_department">Отдел</string>
     <string name="send">Изпратете</string>
+    <string name="prefs_linked_devices">Свързани устройства</string>
+    <string name="prefs_community_and_sharing">Общност &amp; споделяне</string>
     <!-- Title of section on "Settings" screen, for advanced settings -->
+    <string name="prefs_advanced">Разширени</string>
     <!-- Title of section on "Settings" screen, for information and other options about the app -->
+    <string name="prefs_about">Относно</string>
     <string name="prefs_privacy">Поверителност</string>
     <string name="prefs_notifications">Звук &amp; известия</string>
     <string name="prefs_chatdisplay">Чат</string>
@@ -85,7 +90,9 @@
     <string name="prefs_logging">Вписване</string>
     <string name="prefs_title_message_log_switch">Запишете лога във файл</string>
     <!-- Summary text shown under the "Log to file" switch in the settings. %1$s is a placeholder for the time since when the logging is enabled, %2$s is a placeholder for the total file size of the logs (e.g. 2.1MB) -->
+    <string name="prefs_title_sum_message_log_on_since">Логване на системната активност от %1$s (%2$s)</string>
     <!-- Summary text shown under the "Log to file" switch in the settings. %1$s is a placeholder for the name of a file which is used to force-enable the logging., %2$s is a placeholder for the total file size of the logs (e.g. 2.1MB) -->
+    <string name="prefs_title_sum_message_log_forced_on">Системната активност се логва. Изтрийте файла \"%1$s\", за да прекратите логването. (%2$s)</string>
     <string name="prefs_title_sum_message_log_off">Събитията няма да бъдат запазени в лога</string>
     <string name="prefs_reset_push">Рестартирайте push-токен</string>
     <string name="prefs_sum_reset_push">Пререгистрирайте устройството за push-известия с FCM/HMS</string>
@@ -115,6 +122,7 @@
     <string name="set_nickname_title">Задайте псевдоним</string>
     <string name="ok">Добре</string>
     <string name="cancel">Отменете</string>
+    <string name="save">Запазете</string>
     <string name="copy_message_action">Копирайте</string>
     <string name="delete_contact_action">Изтрийте контакт</string>
     <string name="delete_multiple_contact_action">Изтрийте контакти</string>
@@ -125,8 +133,10 @@
     <string name="scan_duplicate">Този идентификатор вече е сканиран и потвърден.</string>
     <string name="linked_email">Имейл</string>
     <!-- Pattern for displaying the user's email address on the My Profile screen. %1$s is a placeholder for the email address, %2$s is a placeholder for the verification state (e.g. "pending") -->
+    <string name="linked_email_pattern">%1$s (%2$s)</string>
     <string name="linked_mobile">Мобилен телефон</string>
     <!-- Pattern for displaying the user's mobile phone number on the My Profile screen. %1$s is a placeholder for the phone number, %2$s is a placeholder for the verification state (e.g. "pending") -->
+    <string name="linked_mobile_pattern">%1$s (%2$s)</string>
     <string name="public_nickname">Псевдоним</string>
     <string name="share_via">Изпрати чрез…</string>
     <string name="share_subject">Чат в %s</string>
@@ -191,7 +201,8 @@
     <string name="click_here_to_change_passphrase">Натиснете тук, за да промените тайната фраза</string>
     <string name="attach_camera">Камера</string>
     <string name="menu_restore">Възстановете от резервно копие</string>
-    <string name="restore_id_hint">Въведете или поставете текстовата секвенция на експортирания идентификатор, за да възстановите</string>
+    <string name="restore_id_hint">Въведете текста от експорта на идентификатора, за да възстановите. Може и да сканирате QR кода от Вашия експортиран идентификатор.</string>
+    <string name="restore_id_string_label">Откъс от текст за експортиране на идентификатора</string>
     <string name="location_placeholder">Местоположение</string>
     <string name="video_placeholder">Видео</string>
     <string name="audio_placeholder">Аудио</string>
@@ -227,6 +238,8 @@
     <string name="prefs_header_other">Друго</string>
     <string name="an_error_occurred">Появи се грешка</string>
     <string name="an_error_occurred_more">Появи се грешка: „%1$s“</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">${app_name_short} не може да се отвори поради неочаквана грешка. Моля, експортирайте журнала/лога по-долу и се свържете с нашия екип по поддръжка, за да разгледаме случая. Извиняваме се за неудобството.</string>
     <string name="acknowledge">Съгласие</string>
     <string name="decline">Несъгласие</string>
     <string name="forward_message">Препратете съобщението</string>
@@ -344,11 +357,15 @@
     <string name="status_rename_group">Групата е преименувана на „%1$s“</string>
     <string name="status_group_new_photo">Снимката на групата е обновена.</string>
     <string name="status_group_new_member">%1$s бе добавен в групата.</string>
+    <string name="status_group_you_were_added">Бяхте добавен към групата.</string>
     <string name="status_group_member_left">%1$s напусна групата.</string>
+    <string name="status_group_you_left">Вие напуснахте групата.</string>
     <string name="status_group_member_kicked">%1$s бе отстранен от групата.</string>
+    <string name="status_group_you_were_removed">Бяхте премахнат от групата.</string>
     <string name="can_not_send_no_group_members">Не можете да изпращате съобщения в празна група</string>
     <string name="you_are_not_a_member_of_this_group">Вие не сте член на тази група</string>
     <string name="title_public_nickname">Псевдоним</string>
+    <string name="title_availability_status">Статус</string>
     <string name="prefs_sum_excluded_sync_identities">Идентификаторите, които са изброени тук, ще бъдат игнорирани при синхронизация на контактите</string>
     <string name="prefs_title_excluded_sync_identities">Списък с изключения</string>
     <string name="synchronize_contact">Синхронизация на контактите от телефона</string>
@@ -477,6 +494,7 @@
     <string name="ballot_result_final">Краен резултат</string>
     <string name="invalid_cannot_send">Не можете да изпращате съобщения на невалиден контакт</string>
     <string name="ballot_answer_count_error">Моля, въведете поне два варианта за гласуване в анкетата.</string>
+    <string name="ballot_removed">Анкетата е премахната</string>
     <string name="contact_state_inactive">Неактивен</string>
     <string name="contact_state_invalid">Невалиден</string>
     <string name="back">Назад</string>
@@ -484,6 +502,7 @@
     <string name="wearable_reply_label">Отговорете на %s</string>
     <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="push_disable_text">Ако продължите, „${app_name_short} Push“ ще бъде използван вместо системните push-известия. Това помага да се намали Вашият дигитален отпечатък, но изисква телефонът Ви да бъде настроен, така че приложението да се изпълнява на заден план. Може да се наложи да се свържете с производителя на устройството за помощ с настройката, ако тази опция отсъства в настройките на устройството.</string>
+    <string name="debug_log_enabled_recently_warning">Ако имате специфичен проблем, моля да се опитате да го възпроизведете, а след това ни изпратете дебъг/лог файла. Това ще ни помогне да проучим проблема по-ефективно. Благодарим Ви.</string>
     <string name="ballot_intermediate_results_show">Покажете временните резултати</string>
     <string name="converting_video">Обработка на видеото</string>
     <string name="video_size_small">Висока (по-малко данни)</string>
@@ -596,7 +615,7 @@
     <string name="no_app_for_location">Няма инсталирано приложение с карти на това устройство</string>
     <string name="prefs_sendlog">Изпратете лог</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
-    <string name="prefs_sendlog_summary">Изпратете лог на ${company_name} за последващ анализ, ако имате проблеми</string>
+    <string name="prefs_sendlog_summary">Изпратете лог/журнал на ${company_name} за последващ анализ, ако имате проблеми</string>
     <string name="prefs_exportlog">Експортирайте лог</string>
     <string name="prefs_exportlog_summary">Изпратете лог-файл с друго приложение</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
@@ -675,7 +694,7 @@
          допълнителен метод да Ви идентифицират потребители, които още не са Ви добавили в техните списъци с контакти. Ние препоръчваме
        да предоставите само името Ви или псевдоним. Ако не добавите псевдоним, ние ще използваме Вашия ${app_name_short} идентификатор по подразбиране.</string>
     <string name="not_linked">не е свързан</string>
-    <string name="linked">свързан</string>
+    <string name="linked">Свързан</string>
     <string name="pending_sms_verification_notice">Вашият телефонен номер все още не е потвърден.</string>
     <string name="no_sms_received">Не получихте ли СМС?</string>
     <string name="really_cancel_verify">Наистина ли искате да прекратите процеса по верификация на телефонния номер?</string>
@@ -688,7 +707,7 @@
     <!-- Shown in prompt dialog during the setup wizard. Only used for work builds (i.e. Threema Work and OnPrem). ${app_name} and ${app_name_short} are placeholders for the app's name, they must be kept as-is and not translated. -->
     <string name="new_wizard_anonymous_confirm">Не сте въвели мобилен телефон или имейл, които да се свържат с Вашия ${app_name_short} идентификатор. Вие няма да се виждате в списъка с контакти на Вашите приятели. Наистина ли искате да използвате ${app_name} анонимно?</string>
     <!-- ${app_name} and ${app_name_short} are placeholders for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
-    <string name="new_wizard_anonymous_confirm_phone_only">Не сте въвели мобилен телефон, който да се свърже с Вашия ${app_name_short} идентификатор. Вие няма да се виждате в списъка с контакти на Вашите приятели. Наистина ли искате да използвате ${app_name} анонимно?</string>
+    <string name="new_wizard_anonymous_confirm_phone_only">Не сте въвели мобилен телефон, който да се свърже с Вашия ${app_name_short} идентификатор. Следователно няма да бъдете добавен автоматично в списъците с контакти на Вашите приятели или колеги. Наистина ли искате да използвате ${app_name} анонимно?</string>
     <string name="error_saving_file">Някои файлове не могат да бъдат запаметени</string>
     <string name="wait_one_minute">Моля, изчакайте поне 10 минути за СМС-а преди да поискате телефонно обаждане.</string>
     <string name="backup_id">Експортиран идентификатор</string>
@@ -772,6 +791,7 @@
     <!-- ${app_name_short} are placeholders for the app's name, e.g. "Threema". They must be left as-is and not translated. -->
     <string name="threema_channel_intro">${app_name_short} каналът Ви предоставя новини за всичко около ${app_name_short}. Искате ли да се абонирате за канала на ${app_name_short} и да го добавите като контакт? Безплатно е и винаги можете да се отпишете.</string>
     <!-- Name of action in context menu for a chat message, which lets the user write a reply to that message -->
+    <string name="reply_to_message">Отговорете</string>
     <string name="contacts_deleted">Контактът е изтрит</string>
     <string name="take_photo">Направете снимка</string>
     <string name="select_from_gallery">Изберете от галерията</string>
@@ -816,6 +836,7 @@
     <string name="play">Възпроизведете</string>
     <string name="pause">Паузирайте</string>
     <string name="retry">Повторете</string>
+    <string name="voice_message">Гласово съобщение</string>
     <string name="voice_message_record">Запишете гласово съобщение</string>
     <string name="open_navdrawer">Отворете навигационния панел</string>
     <string name="profile_picture">Профилна снимка</string>
@@ -925,6 +946,7 @@
     <string name="password_too_short_generic">Паролата е твърде кратка</string>
     <string name="passwords_dont_match">Паролите не съвпадат</string>
     <!-- Error message shown when setting up a custom server for the Threema Safe feature. %s is a placeholder for the details of the error. -->
+    <string name="threema_safe_test_unsuccessful">Неуспешен тест: %s</string>
     <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="preparing_threema_safe">Подготовка на ${app_name_short} Safe</string>
     <string name="disable_powermanager_title">Енергийни ограничения</string>
@@ -1106,6 +1128,7 @@
         <p>За повече информация, отидете в „Меню - Threema 2,0 за настолен компютър (бета)“.</p>
         ]]></string>
     <string name="tap_to_start">Натиснете тук, за да започнете %s сега.</string>
+    <string name="notification_title_restart">Изисква се рестартиране</string>
     <string name="two_years">2 години</string>
     <string name="backup_data_no_permission">Не може да се записва в тази директория. Моля, изберете друга.</string>
     <string name="prefs_sum_show_unread_badge">Показване на индикатор за броя непрочетени съобщения</string>
@@ -1211,7 +1234,9 @@
     <string name="error_unable_loading_media_thumb">Грешка. Миниатюрата не може да бъде заредена</string>
     <string name="filter_list">Филтрирайте списъка</string>
     <!-- A hint/placeholder text that is shown when a search field appears. The user needs to enter a search query -->
+    <string name="search_list">Търсене в списъка</string>
     <string name="hint_filter_list">Въведете текст на филтъра</string>
+    <string name="hint_search_list">Въведете текст за търсене</string>
     <string name="add">Добавете</string>
     <string name="only_images_or_videos">Само изображения или видеа могат да се избират</string>
     <string name="media_gallery_gifs">GIF файлове</string>
@@ -1526,10 +1551,13 @@
     <string name="problemsolver_title_background_data">Данните на заден план са ограничени</string>
     <string name="problemsolver_title_notifications">Известията са деактивирани</string>
     <string name="problemsolver_title_fullscreen_notifications">Не са разрешени известията при цял екран</string>
+    <string name="problemsolver_title_debug_log_enabled">Логването още е активно</string>
     <string name="problemsolver_explain_fullscreen_notifications">На приложението не му е разрешено да показва известия на цял екран. Може да пропуснете входящите обаждания, когато устройството е заключено. За да го оправите, активирайте „Позволете известията на цял екран.“</string>
     <string name="problemsolver_explain_notifications">Известията са напълно деактивирани за това приложение. Няма да бъдете информирани за входящите съобщения или обаждания и приложението може и да не работи правилно. За да го поправите, активирайте „Всички известия.“</string>
     <string name="problemsolver_explain_background_data">Приложението не може да използва мобилни данни, когато е във фонов режим. Няма да бъдете информирани за входящи съобщения, освен ако не отворите самото приложение. За да поправите това, активирайте „Данни във фонов режим.“</string>
     <string name="problemsolver_explain_background">Ограничена е възможността за работа във фонов режим. Няма да получавате известия и много функции няма да работят правилно. За да поправите това, натиснете на „Използване на батерията от приложението“ и изберете „Неограничено.“</string>
+    <string name="problemsolver_explain_debug_log_enabled">Преди известно време активирахте дебъг лога. Ако вече не желаете да логвате събития и данни за мрежата, можете да деактивирате логването отново.</string>
+    <string name="problemsolver_explain_debug_log_force_enabled">${app_name} понастоящем логва събития и данни за мрежата във файл, защото създадохте файла \"%s\". Ако не се нуждаете повече от водене на журнал, можете да изтриете файла.</string>
     <string name="problemsolver_info_text">Наименованията на някои от тези системни настройки, които се споменават по-горе, може да се различават в зависимост от версията на Android и от производителя на устройството.</string>
     <string name="problemsolver_title_app_battery_usgae_optimized">Използването на батерията е настроено на “оптимизирано“</string>
     <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
@@ -1556,11 +1584,27 @@
     <string name="incoming_calls">Входящи повиквания</string>
     <string name="group_chats">Групови чатове</string>
     <string name="edit_history_file_no_caption">История на файл без заглавие</string>
+    <string name="prefs_title_error_reporting">Сигнал за грешка</string>
+    <string name="prefs_send_error_reports">Изпратете анонимен доклад</string>
+    <string name="error_reporting_option_never_send">Никога</string>
+    <string name="error_reporting_option_always_send">Винаги</string>
+    <string name="error_reporting_option_always_ask">Попитай ме всеки път</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="error_reporting_summary_never_send">Никога не изпращайте отчети за грешки на ${company_name}</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="error_reporting_summary_always_send">Автоматично изпращане на отчети за грешки до ${company_name}, когато се засече критична грешка</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="error_reporting_summary_always_ask">Попитай ме всеки път дали да се изпрати доклад за грешки на ${company_name}</string>
+    <string name="error_detected_dialog_title">Изпратете анонимен доклад</string>
+    <string name="crash_detected_dialog_text">Изглежда, че наскоро е възникнал проблем. Желаете ли да изпратите анонимен отчет за грешката?</string>
+    <string name="crash_detected_dialog_remember_choice">Запомни избора ми</string>
+    <string name="crash_detected_dialog_send_button">Изпратете</string>
+    <string name="error_reporting_learn_more_button">Научете повече</string>
+    <string name="error_reporting_details_button">Технически подробности</string>
     <!-- Shown in the advanced settings, shows the user their own Device's uniquely generated ID, which is used for sending error reports -->
+    <string name="prefs_error_reporting_id">Анонимен идентификатор на устройството</string>
     <!-- The %s is a placeholder for an ID. It must be left as-is. -->
+    <string name="prefs_error_reporting_id_summary">Този идентификатор се използва за обединяване на доклади за грешки. Той е анонимен и не е свързан с Вашия Threema идентификатор.\n%s</string>
     <string name="md_device_currently_active">Активни в момента</string>
     <string name="md_device_last_active_at">Последно активен: %s</string>
     <plurals name="md_max_device_slots_reached_info">
@@ -1579,9 +1623,13 @@
     <string name="md_drop_device_failed_dialog_message">Моля, проверете интернет връзката Ви и опитайте отново.</string>
     <string name="md_drop_device_failed_dialog_button_close">Затворете</string>
     <!-- Message shown in dialog when the user starts configuring a backup, but we detected that there might be a problem and thus offer a workaround option to choose from -->
+    <string name="backup_path_selection_message">Открит е потенциален проблем при избора на папка. Ако проблемът продължи, може да запазите резервното копие в папката „Документи“, а не в избрана от Вас папка.</string>
     <!-- Button label on dialog when configuring a backup, shown on dialog that lets the user choose how they want to select the backup folder. This option lets them use the regular file picker. -->
+    <string name="backup_path_selection_default">Изберете папка</string>
     <!-- Button label on dialog when configuring a backup, shown on dialog that lets the user choose how they want to select the backup folder. This option lets them bypass the file picker and use the default Documents folder instead -->
+    <string name="backup_path_selection_documents">Използвайте папката “Документи”</string>
     <!-- accessibility -->
+    <string name="cd_menu_more">Още опции</string>
     <string name="cd_edited">съобщението е редактирано</string>
     <string name="cd_created_at">създадено: %s</string>
     <string name="cd_edited_at">редактирано: %s</string>
@@ -1640,6 +1688,8 @@
     <string name="device_linking_error_invalid_contact_title">Невалиден контакт</string>
     <!-- Error message when linking of a new device failed due to an invalid contact. %1$s will be replaced with the threema identity of the affected contact. -->
     <string name="device_linking_error_invalid_contact_body">Контактът %1$s е запазен неправилно на това устройство и пречи на свързването с новото устройство. Моля, свържете се с поддръжката (\"Основно меню &gt; Помощ\").</string>
+    <string name="device_linking_error_invalid_timestamp_title">Невалидна дата</string>
+    <string name="device_linking_error_invalid_timestamp_body">Открита е невалидна дата. Моля, свържете се с поддръжката („Главно меню &gt; Помощ“).</string>
     <string name="work_directory_title">Директория на фирмата</string>
     <!-- Instruction text for the user directory search -->
     <string name="work_directory_search">Потърсете във фирмената директория</string>
@@ -1647,12 +1697,15 @@
     <string name="work_directory_empty_view_text">Моля, въведете поне 3 букви от името, за да започне търсенето във фирмената директория с ${app_name_short} потребители.</string>
     <!-- Message that is shown when the user wants to share an invalid file. -->
     <string name="invalid_file_cannot_be_shared">Този файл е невалиден и не може да бъде споделен</string>
+    <string name="availability_status_none">Няма статус</string>
     <!-- Status (only relevant for Work), e.g. as shown on their profile, indicating that the person is currently not available, i.e. out-of-office -->
     <string name="availability_status_unavailable">Недостъпен</string>
     <!-- Status (only relevant for Work), e.g. as shown on their profile, indicating that the person is currently busy-->
+    <string name="availability_status_busy">Зает</string>
     <!-- Error message (only relevant for OnPrem) if the preset server url is different from the one provided by the activation link. -->
     <string name="error_preset_onprem_url_mismatch_intent">Предоставеният линк за активация е невалиден. Моля, свържете се с Вашия администратор.</string>
     <!-- Warning message displayed on screen where the user can export a debug log file to share with Support. ${company_name} is a placeholder for the company name and should be kept as-is, not translated. -->
+    <string name="export_logs_screen_warning">За запазване на поверителността, споделяйте лог файла само с екипа по поддръжка на ${company_name} и само ако сте помолени да го направите.</string>
     <string name="work_intro_screen_work_title">ИЗКЛЮЧИТЕЛНО СИГУРНА КОМУНИКАЦИЯ ЗА ФИРМИТЕ</string>
     <string name="work_intro_screen_work_subtitle">Threema Work е приложение за сигурна комуникация между фирми и компании, което е криптирано от край до край, съобразено с GDPR и е разработено в Швейцария.</string>
     <string name="work_intro_screen_work_sign_in_button_label">Впишете се сега</string>
@@ -1668,10 +1721,13 @@
     <string name="work_intro_screen_onprem_use_private_hint">Ако искате да използвате Threema за лични нужди, то ние Ви препоръчваме да използвате частното Threema приложение.</string>
     <string name="work_intro_screen_onprem_download_private_button_label">Изтеглете сега</string>
     <!-- Description of the notification channel which is used when DualLock (a.k.a. "Remote Secret") is active. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_notification_channel_description">Показва за постоянно известие, когато ${remote_secret} е активно.</string>
     <!-- Text of the notification which is shown when DualLock (a.k.a. "Remote Secret") is active. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_notification_text">${remote_secret} е активно. Натиснете, за да научите повече.</string>
     <!-- Message shown fullscreen when the app is opened, to inform the user that their access has been blocked by an admin. Only used for OnPrem builds. -->
     <string name="remote_secrets_blocked_by_admin">Достъпът Ви до това приложение е блокиран от Вашия администратор.\n\nМоля, свържете се с администратора за повече информация.</string>
     <!-- Label on button, shown when the app is blocked with the DualLock (a.k.a. "Remote Secret") feature and the user has no other option than to close the app -->
+    <string name="remote_secrets_close_app">Затворете приложението</string>
     <!-- Message shown fullscreen when the app is opened, to inform the user that the DualLock (a.k.a. "Remote Secret") needed to unlock the app could not be fetched due to a network issue. Shown above a "Retry" button. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
     <string name="remote_secrets_failed_to_fetch">${remote_secret} токенът не може да бъде извлечен. Моля, проверете интернет връзката Ви и опитайте отново.</string>
     <!-- Shown on loading spinner after app is started while DualLock (a.k.a. "Remote Secret") is fetched from the server to unlock the app. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
@@ -1692,8 +1748,41 @@
     <string name="remote_secret_deactivating">Деактивиране ${remote_secret}</string>
     <!-- Error message shown fullscreen when deactivating the DualLock (a.k.a. "Remote Secret") feature failed. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
     <string name="remote_secret_deactivating_failed">Деактивацията на ${remote_secret} е неуспешна. Моля, проверете интернет връзката Ви и опитайте отново.</string>
+    <string name="referral_banner_title">Препоръчайте и спечелете</string>
+    <string name="referral_banner_body">Поканете Вашите приятели да използват Threema Work в тяхната фирма и спечелете бонус за препоръка!</string>
+    <string name="referral_screen_title">Препоръчайте и спечелете</string>
+    <string name="referral_screen_subtitle">Получете до 10% от първата фактура на препоръчаната компания.</string>
+    <string name="referral_how_it_works_title">Как работи</string>
+    <string name="referral_how_it_works_referral_title">Препоръка</string>
+    <string name="referral_how_it_works_referral_body">Поканете приятел или неговата компания да се присъедини към Threema Work. Важно е Вашият Threema идентификатор да бъде посочен при регистрацията или при закупуването на лицензи, за да бъде отчетена препоръката Ви.</string>
+    <string name="referral_how_it_works_requirements_title">Изисквания</string>
+    <string name="referral_how_it_works_requirements_body">Препоръчаната фирма не бива да е вече наш клиент и трябва да поръча лицензи</string>
+    <string name="referral_how_it_works_confirmation_title">Потвърждение</string>
+    <string name="referral_how_it_works_confirmation_body">За да гарантираме, че Вашата препоръка е правилно асоциирана и потвърдена, ние ще се свържем с Вас преди да направим плащането. Ще Ви информираме веднага щом проверката приключи.</string>
+    <string name="referral_your_reward_title">Вашата награда</string>
+    <string name="referral_your_reward_subtitle">Спечелете бонус за препоръка</string>
+    <string name="referral_your_reward_body">За Вашата препоръка, Вие ще получите 10% от първата фактура на препоръчаната фирма (без данъци/такси). Бонусът ще Ви бъде прехвърлен до 30-60 дни след плащането на фактурата.</string>
+    <string name="referral_share_invitation_link">Споделете линк за покана</string>
+    <string name="referral_view_terms_and_conditions">Вижте Условия &amp; ползване</string>
+    <string name="referral_invitation_message_content">Здравейте, мисля, че това може да Ви бъде полезно: Threema Work е идеална опция за сигурна бизнес комуникация. Това е Вашият тестови линк: %1$s</string>
+    <string name="prefs_voip_abort_on_bluetooth_disconnect_title">Прекратяване на разговора, когато Блутуутът е изключен</string>
+    <string name="prefs_voip_abort_on_bluetooth_disconnect_summary_on">Обаждането приключва, когато Блутуут слушалките се изключат по време на разговор.</string>
+    <string name="prefs_voip_abort_on_bluetooth_disconnect_summary_off">Обаждането ще продължи, ако Блутуут слушалките се изключат по време на обаждане. Внимание: Това може да деактивира бутона за затваряне на разговора на слушалките.</string>
+    <string name="failed_to_load_conversations">Невъзможно е да се заредят чатовете.</string>
+    <string name="contact_support">Свържете се с поддръжката</string>
+    <string name="edit_availability_status_modal_title">Достъпност</string>
+    <string name="edit_availability_status_modal_subtitle">Този статус е видим за всички във фирмата.</string>
+    <string name="edit_availability_status_modal_optional_message_label">Персонализиран текст (По избор)</string>
+    <string name="edit_availability_status_modal_optional_message_placeholder">В среща</string>
+    <string name="edit_availability_status_modal_optional_message_description">Задайте персонализирано съобщение за състояние, когато сте избрали Зает или Недостъпен.</string>
+    <string name="edit_availability_status_modal_optional_message_too_long">Текстът е много дълъг и ще трябва да го съкратите</string>
+    <string name="tooltip_title_availability_status">Достъпност</string>
+    <string name="tooltip_text_availability_status_in_chat">Вижте дали някой е зает или недостъпен преди да му пишете. Може да зададете собствения Ви статус в профила.</string>
+    <string name="tooltip_text_availability_status_in_profile">Задайте Вашия статус, за да покажете кога сте зает или недостъпен.</string>
+    <string name="view_full_availability_status_modal_title">Достъпност</string>
     <!-- A hint text that will be played by the android screen reader in accessibility mode. It explains the effect of a click action. -->
     <!-- Clicking will open a new modal view that displays the full length of a contact's availability status description. -->
+    <string name="accessibility_view_full_availability_status">Докоснете, за да видите пълния статус на достъпност</string>
     <plurals name="contacts_counter_label">
         <item quantity="one">%d контакт</item>
         <item quantity="other">%d контакти</item>
@@ -1747,6 +1836,7 @@
         <item quantity="other">%d изтрити съобщения</item>
     </plurals>
     <!-- Used for indicating for how long the notifications of a chat are muted -->
+    <string name="notifications_for_one_week">За 1 седмица</string>
     <plurals name="notifications_for_x_hours">
         <item quantity="one">За %d час</item>
         <item quantity="other">За %d часа</item>

@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.format.DateFormat
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -29,7 +28,6 @@ import ch.threema.app.R
 import ch.threema.app.mediaattacher.EditSendContactViewModel
 import ch.threema.app.ui.VCardPropertyView
 import ch.threema.app.ui.setMargin
-import ch.threema.app.utils.VCardExtractor
 import ch.threema.app.utils.logScreenVisibility
 import ch.threema.base.utils.getThreemaLogger
 import com.google.android.material.appbar.AppBarLayout
@@ -167,11 +165,7 @@ class EditSendContactActivity : ThreemaToolbarActivity() {
             return
         }
 
-        viewModel.initializeContact(
-            contactUri,
-            contentResolver,
-            VCardExtractor(DateFormat.getDateFormat(applicationContext), resources),
-        )
+        viewModel.initializeContact(contactUri)
 
         // Show edit-texts for the name properties that are set in the contact
         val editTexts = listOf(
@@ -212,7 +206,7 @@ class EditSendContactActivity : ThreemaToolbarActivity() {
             // Send the possibly modified VCard as file
             findViewById<FloatingActionButton>(R.id.send_contact).apply {
                 setOnClickListener {
-                    viewModel.prepareFinalVCard(context, cacheDir, contactUri)
+                    viewModel.prepareFinalVCard(contactUri)
                 }
                 visibility = View.VISIBLE
             }

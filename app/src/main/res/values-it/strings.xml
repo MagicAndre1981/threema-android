@@ -252,6 +252,8 @@
     <string name="prefs_header_other">Altri</string>
     <string name="an_error_occurred">Si è verificato un errore</string>
     <string name="an_error_occurred_more">Si è verificato un errore: \"%1$s\"</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">Impossibile aprire ${app_name_short} a causa di un errore imprevisto. Esporta il seguente file di log e contatta il nostro team di assistenza in modo che possiamo esaminare il problema. Ci scusiamo per l\'inconveniente.</string>
     <string name="acknowledge">Conferma</string>
     <string name="decline">Non approvo</string>
     <string name="forward_message">Inoltra</string>

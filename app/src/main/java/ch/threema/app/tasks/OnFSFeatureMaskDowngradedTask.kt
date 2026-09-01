@@ -3,6 +3,7 @@ package ch.threema.app.tasks
 import ch.threema.app.services.ContactService
 import ch.threema.app.services.MessageService
 import ch.threema.base.utils.getThreemaLogger
+import ch.threema.data.IdentityProvider
 import ch.threema.data.models.ContactModel
 import ch.threema.data.models.ContactModelData
 import ch.threema.data.repositories.ContactModelRepository
@@ -10,7 +11,6 @@ import ch.threema.domain.fs.DHSession
 import ch.threema.domain.protocol.ThreemaFeature
 import ch.threema.domain.stores.DHSessionStore
 import ch.threema.domain.stores.DHSessionStoreException
-import ch.threema.domain.stores.IdentityStore
 import ch.threema.domain.taskmanager.ActiveTask
 import ch.threema.domain.taskmanager.ActiveTaskCodec
 import ch.threema.domain.taskmanager.Task
@@ -45,7 +45,7 @@ class OnFSFeatureMaskDowngradedTask(
     private val contactModelRepository: ContactModelRepository by inject()
     private val messageService: MessageService by inject()
     private val dhSessionStore: DHSessionStore by inject()
-    private val identityStore: IdentityStore by inject()
+    private val identityProvider: IdentityProvider by inject()
 
     override val type = "FSFeatureMaskDowngraded"
 
@@ -70,7 +70,7 @@ class OnFSFeatureMaskDowngradedTask(
         try {
             fsSession = dhSessionStore.getBestDHSession(
                 /* myIdentity = */
-                identityStore.getIdentityString(),
+                identityProvider.getIdentityString(),
                 /* peerIdentity = */
                 identity,
                 /* handle = */

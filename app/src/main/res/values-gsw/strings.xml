@@ -238,6 +238,8 @@
     <string name="prefs_header_other">Wiiteri</string>
     <string name="an_error_occurred">Es isch en Fehler ufträtte</string>
     <string name="an_error_occurred_more">Es isch en Fehler ufträtte: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">${app_name_short} hät wägeme unerwartete Fehler nöd chöne göffnet werde. Bitte exportiered Sie d’Logdatei und kontaktiered Sie üses Support-Team, demit mer s’Problem chönd gnauer aluege. Mer entschuldiged üs für d’Unannehmlichkeite.</string>
     <string name="acknowledge">Bestätige</string>
     <string name="decline">Ablehne</string>
     <string name="forward_message">Wiiterleite</string>
@@ -613,8 +615,8 @@
     <string name="prefs_sendlog">Logdatei verschicke</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="prefs_sendlog_summary">Logdatei für Problemanalyse a ${company_name} schicke</string>
-    <string name="prefs_exportlog">Logdatei teile</string>
-    <string name="prefs_exportlog_summary">Logdatei für Problemanalyse teile</string>
+    <string name="prefs_exportlog">Logdatei exportiere</string>
+    <string name="prefs_exportlog_summary">Logdatei über e anderi App teile</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="permission_storage_required">Aktiviered Sie d’Speicher-Berächtigung für ${app_name}, zum Medie z’sichere oder z’schicke.</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->

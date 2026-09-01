@@ -1,2 +1,2 @@
-- Unterstützung für Emojis der Version 17.0
+- Behebung eines Fehlers beim Drehen des Smartphones während der Nutzung der Kamera in Threema
 - Verbesserungen und Behebung verschiedener Fehler

@@ -143,6 +143,10 @@ class AppStartupMonitorImpl : AppStartupMonitor {
      * If an app startup error is reported, this will never return, as the app is never considered "ready" in that case.
      */
     override suspend fun awaitAll() {
+        // We return immediately if the app is already ready, which allows us to avoid a coroutine suspension
+        if (isReady()) {
+            return
+        }
         systemStatuses.first { statuses ->
             statuses.all { (_, status) ->
                 status == SystemStatus.READY

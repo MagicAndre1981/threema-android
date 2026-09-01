@@ -132,7 +132,7 @@ public class BackupThreemaSafeFragment extends Fragment implements GenericAlertD
             floatingActionButton = fragmentView.findViewById(R.id.floating);
             floatingActionButton.setOnClickListener(v -> {
                 if (preferenceService.getThreemaSafeEnabled()) {
-                    threemaSafeService.uploadNow(true);
+                    threemaSafeService.uploadNow();
                     threemaSafeService.reschedulePeriodicUpload();
                 }
             });

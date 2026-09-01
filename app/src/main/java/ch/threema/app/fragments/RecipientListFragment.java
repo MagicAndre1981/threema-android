@@ -452,11 +452,18 @@ public abstract class RecipientListFragment extends ListFragment implements List
 
     protected abstract @StringRes int getEmptyText();
 
-    protected abstract @DrawableRes int getAddIcon();
+    protected @DrawableRes int getAddIcon() {
+        return 0;
+    }
 
-    protected abstract @StringRes int getAddText();
+    protected @StringRes int getAddText() {
+        return 0;
+    }
 
-    protected abstract Intent getAddIntent();
+    @Nullable
+    protected Intent getAddIntent() {
+        return null;
+    }
 
     protected abstract boolean isMultiSelectAllowed();
 }

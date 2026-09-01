@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_layout"
     android:layout_width="match_parent"
-    android:background="@color/md_theme_light_background"
-    android:orientation="horizontal"
     android:layout_height="72dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:background="@color/widget_color_background"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/grid_unit_x2">
+
+    <!-- Do not use ?attr/ references for colors in this layout file. A remote view can not resolve them -->
 
     <ImageView
         android:id="@+id/avatar"
-        android:visibility="visible"
-        android:layout_gravity="center_vertical"
         android:layout_width="@dimen/avatar_size_small"
         android:layout_height="@dimen/avatar_size_small"
-        android:layout_marginRight="8dp" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/grid_unit_x1"
+        android:importantForAccessibility="no"
+        android:visibility="visible"
+        tools:background="@drawable/ic_contact" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,50 +29,56 @@
             android:id="@+id/sender_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/md_theme_light_onBackground"
             android:layout_alignParentLeft="true"
             android:layout_toLeftOf="@+id/msg_date"
-            android:textSize="18sp"
-            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="sans-serif-light"
-            android:text="" />
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/widget_color_on_background"
+            android:textSize="18sp"
+            tools:text="Sender Name" />
 
         <TextView
             android:id="@+id/msg_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_alignParentRight="true"
             android:layout_alignBaseline="@id/sender_text"
-            android:textColor="@color/md_theme_light_onBackground"
-            android:textSize="12sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/grid_unit_x0_5"
             android:maxLines="1"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/widget_color_on_background"
+            android:textSize="12sp"
+            tools:text="Jul 27" />
 
         <TextView
             android:id="@+id/message_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sender_text"
-            android:layout_marginTop="-2dp"
             android:layout_alignParentLeft="true"
+            android:layout_marginTop="-2dp"
             android:layout_toLeftOf="@+id/message_count"
-            android:textColor="@color/md_theme_light_onBackground"
-            android:textSize="12sp"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/widget_color_on_background"
+            android:textSize="12sp"
+            tools:text="Message body" />
 
         <TextView
             android:id="@+id/message_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignBaseline="@id/message_text"
-            android:textColor="@color/md_theme_light_onBackground"
+            android:layout_alignParentRight="true"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/widget_color_on_background"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:maxLines="1"
-            android:text="" />
+            tools:text="2" />
 
     </RelativeLayout>
 

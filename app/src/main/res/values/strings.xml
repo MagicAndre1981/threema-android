@@ -246,6 +246,8 @@
     <string name="prefs_header_other">Other</string>
     <string name="an_error_occurred">An error occurred</string>
     <string name="an_error_occurred_more">An error occurred: “%1$s”</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">${app_name_short} couldn’t be opened because of an unexpected error.  Please export the log file below and contact our support team so we can investigate the issue. We apologize for the inconvenience.</string>
     <string name="acknowledge">Agree</string>
     <string name="decline">Disagree</string>
     <string name="forward_message">Forward message</string>
@@ -636,9 +638,9 @@
     <string name="no_app_for_location">No map application found on this device</string>
     <string name="prefs_sendlog">Send Log</string>
     <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
-    <string name="prefs_sendlog_summary">Send Logfile to ${company_name} for further analysis in case of problems</string>
-    <string name="prefs_exportlog">Export Log</string>
-    <string name="prefs_exportlog_summary">Share logfile with another app</string>
+    <string name="prefs_sendlog_summary">Send log file to ${company_name} for further analysis in case of problems</string>
+    <string name="prefs_exportlog">Export Log File</string>
+    <string name="prefs_exportlog_summary">Share log file with another app</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="permission_storage_required">To save or send media, allow ${app_name} permission to access storage.</string>
     <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->

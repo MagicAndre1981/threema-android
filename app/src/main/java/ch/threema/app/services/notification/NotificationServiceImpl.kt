@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.os.Build
+import android.os.DeadObjectException
 import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -1298,7 +1299,11 @@ class NotificationServiceImpl(
     }
 
     private fun cancel(notificationId: Int, tag: String? = null) {
-        notificationManagerCompat.cancel(tag, notificationId)
+        try {
+            notificationManagerCompat.cancel(tag, notificationId)
+        } catch (e: DeadObjectException) {
+            logger.error("Failed to cancel notification", e)
+        }
     }
 
     companion object {

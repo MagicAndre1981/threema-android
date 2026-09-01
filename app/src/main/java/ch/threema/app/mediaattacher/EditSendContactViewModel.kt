@@ -1,15 +1,17 @@
 package ch.threema.app.mediaattacher
 
-import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
-import android.text.format.DateFormat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import ch.threema.app.files.AppDirectoryProvider
 import ch.threema.app.utils.FileUtil
 import ch.threema.app.utils.VCardExtractor
 import ch.threema.base.utils.getThreemaLogger
+import ch.threema.common.DispatcherProvider
+import ch.threema.common.takeUnlessEmpty
 import ezvcard.Ezvcard
 import ezvcard.VCard
 import ezvcard.property.FormattedName
@@ -18,16 +20,20 @@ import ezvcard.property.VCardProperty
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private val logger = getThreemaLogger("EditSendContactViewModel")
 
 /**
  * Contains the data needed in the EditSendContactActivity.
  */
-class EditSendContactViewModel : ViewModel() {
+class EditSendContactViewModel(
+    private val appContext: Context,
+    private val vCardExtractor: VCardExtractor,
+    private val appDirectoryProvider: AppDirectoryProvider,
+    private val dispatcherProvider: DispatcherProvider,
+) : ViewModel() {
     /* The currently shown formatted name in the edit texts */
     private val formattedName: MutableLiveData<FormattedName> = MutableLiveData()
 
@@ -67,53 +73,50 @@ class EditSendContactViewModel : ViewModel() {
     /**
      * Initializes the view model based on the given contact uri.
      */
-    @Suppress("BlockingMethodInNonBlockingContext")
-    fun initializeContact(
-        contactUri: Uri,
-        contentResolver: ContentResolver,
-        extractor: VCardExtractor,
-    ) {
+    fun initializeContact(contactUri: Uri) {
         if (properties.value != null) {
             return
         }
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val vCard = contentResolver.openInputStream(contactUri).use {
-                BufferedReader(InputStreamReader(it)).useLines { l -> l.joinToString("\n") }
-            }.let {
-                Ezvcard.parse(it).first()
-            }
+        viewModelScope.launch {
+            val vCard = readVCard(contactUri)
 
-            if (createFormattedName(
-                    vCard,
-                    extractor,
-                ) == "" &&
-                vCard.formattedName?.value ?: "" != ""
-            ) {
+            if (vCard == null) {
+                logger.warn("vCard was null")
+                structuredName.postValue(StructuredName())
+            } else if (createFormattedName(vCard) == null && !vCard.formattedName?.value.isNullOrEmpty()) {
                 formattedName.postValue(vCard.formattedName)
             } else {
                 structuredName.postValue(vCard.structuredName ?: StructuredName())
             }
 
-            properties.postValue(vCard.properties.associateWith { true }.toMutableMap())
+            properties.postValue(
+                vCard?.properties?.associateWith { true }?.toMutableMap() ?: mutableMapOf(),
+            )
         }
+    }
+
+    private suspend fun readVCard(contactUri: Uri): VCard? = withContext(dispatcherProvider.io) {
+        appContext.contentResolver.openInputStream(contactUri)
+            .use { inputStream ->
+                BufferedReader(InputStreamReader(inputStream)).useLines { l -> l.joinToString("\n") }
+            }
+            .let { vCardString ->
+                Ezvcard.parse(vCardString).first()
+            }
     }
 
     /**
      * Get the formatted name and the vCard as file containing the selected properties.
      */
-    @Suppress("BlockingMethodInNonBlockingContext")
-    fun prepareFinalVCard(context: Context, cacheDir: File, contactUri: Uri) {
-        CoroutineScope(Dispatchers.IO).launch {
+    fun prepareFinalVCard(contactUri: Uri) {
+        viewModelScope.launch(dispatcherProvider.io) {
             val vCard = VCard()
             if (structuredName.value != null) {
                 vCard.setProperty(structuredName.value)
                 vCard.setProperty(
                     FormattedName(
-                        createFormattedName(
-                            vCard,
-                            VCardExtractor(DateFormat.getDateFormat(context), context.resources),
-                        ),
+                        createFormattedName(vCard) ?: "",
                     ),
                 )
             } else if (formattedName.value != null) {
@@ -125,8 +128,8 @@ class EditSendContactViewModel : ViewModel() {
                 vCard.addProperty(it)
             }
 
-            val mimeType = FileUtil.getMimeTypeFromUri(context, contactUri)
-            val modifiedContactFile = File(cacheDir, FileUtil.getDefaultFilename(mimeType))
+            val mimeType = FileUtil.getMimeTypeFromUri(appContext, contactUri)
+            val modifiedContactFile = File(appDirectoryProvider.cacheDirectory, FileUtil.getDefaultFilename(mimeType))
 
             val writer = Ezvcard.write(vCard).prodId(false)
             writer.go(modifiedContactFile)
@@ -138,16 +141,18 @@ class EditSendContactViewModel : ViewModel() {
     /**
      * Create the formatted name (FN) based on the structured name (N).
      */
-    private fun createFormattedName(vcard: VCard, extractor: VCardExtractor): String {
-        if (vcard.structuredName != null) {
-            try {
-                return extractor.getText(vcard.structuredName, false).trim()
-            } catch (e: Exception) {
-                if (e !is VCardExtractor.VCardExtractionException) {
-                    logger.error("Could not extract name of contact", e)
+    private fun createFormattedName(vcard: VCard): String? =
+        vcard.structuredName
+            ?.let { structuredName ->
+                try {
+                    vCardExtractor.getText(structuredName, false)
+                        .trim()
+                        .takeUnlessEmpty()
+                } catch (e: Exception) {
+                    if (e !is VCardExtractor.VCardExtractionException) {
+                        logger.error("Could not extract name of contact", e)
+                    }
+                    null
                 }
             }
-        }
-        return ""
-    }
 }

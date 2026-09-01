@@ -82,7 +82,7 @@ public class AddContactActivity extends ThreemaActivity implements GenericAlertD
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logScreenVisibility(this, logger);
-        if (dependencies.getIdentityStore().getIdentityString() == null) {
+        if (!dependencies.getIdentityProvider().hasIdentity()) {
             finish();
             return;
         }

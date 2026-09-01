@@ -219,6 +219,7 @@ når den første meldingen mottas.</string>
     <string name="prefs_header_other">Annet</string>
     <string name="an_error_occurred">Det oppstod en feil</string>
     <string name="an_error_occurred_more">Det oppstod en feil: “%1$s”</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Enig</string>
     <string name="decline">Uenig</string>
     <string name="forward_message">Videresend melding</string>

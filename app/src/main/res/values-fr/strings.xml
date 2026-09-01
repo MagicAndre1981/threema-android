@@ -238,6 +238,8 @@
     <string name="prefs_header_other">Autre</string>
     <string name="an_error_occurred">Une erreur s\'est produite</string>
     <string name="an_error_occurred_more">Une erreur s\'est produite : « %1$s »</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">Échec de l\'ouverture de ${app_name_short} en raison d\'une erreur inconnue. Veuillez exporter le fichier journal ci-dessous et contacter notre équipe d\'assistance pour que nous puissions enquêter sur le problème. Nous nous excusons pour la gêne occasionnée.</string>
     <string name="acknowledge">Accuser réception</string>
     <string name="decline">Désapprouver</string>
     <string name="forward_message">Transférer le message</string>

@@ -49,6 +49,7 @@ public class ConversationNotificationUtil {
     protected static final HashMap<String, ConversationNotificationGroup> notificationGroupHashMap = new HashMap<>();
     private static final int MAX_NOTIFICATION_THUMBNAIL_SIZE_BYTES = 1024 * 1024;
 
+    @Nullable
     public static ConversationNotification convert(
         @NonNull Context context,
         @NonNull AbstractMessageModel messageModel,
@@ -127,7 +128,7 @@ public class ConversationNotificationUtil {
         return messageModel.getCreatedAt();
     }
 
-    @NonNull
+    @Nullable
     private static ConversationNotification create(
         @NonNull final Context context,
         @NonNull final MessageModel messageModel,
@@ -136,6 +137,10 @@ public class ConversationNotificationUtil {
         @NonNull final ContactNameFormat contactNameFormat
     ) {
         final @Nullable ContactModel contactModel = contactService.getByIdentity(messageModel.getIdentity());
+        if (contactModel == null) {
+            logger.warn("Contact for notification not found");
+            return null;
+        }
         final String groupUid = "i" + messageModel.getIdentity();
         synchronized (notificationGroupHashMap) {
             ConversationNotificationGroup group = notificationGroupHashMap.get(groupUid);
@@ -201,7 +206,7 @@ public class ConversationNotificationUtil {
         return null;
     }
 
-    @NonNull
+    @Nullable
     private static ConversationNotification create(
         final Context context,
         @NonNull final GroupMessageModel messageModel,
@@ -210,6 +215,10 @@ public class ConversationNotificationUtil {
         @NonNull final ContactNameFormat contactNameFormat
     ) {
         final GroupModelOld groupModel = groupService.getById(messageModel.getGroupId());
+        if (groupModel == null) {
+            logger.warn("Group for notification not found");
+            return null;
+        }
         final String groupUid = "g" + messageModel.getGroupId();
         synchronized (notificationGroupHashMap) {
             @Nullable ConversationNotificationGroup group = notificationGroupHashMap.get(groupUid);

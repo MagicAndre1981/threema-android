@@ -61,7 +61,7 @@ class SentryServiceTest {
             ),
             metaInfo = SentryService.MetaInfo(
                 androidSdkVersion = 35,
-                appVersion = "6.4.0",
+                release = "test@6.4.0",
                 versionCode = 1234,
                 buildFlavor = "test",
                 deviceModel = "Awesome Phone XY",

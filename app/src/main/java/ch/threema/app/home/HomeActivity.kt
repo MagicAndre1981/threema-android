@@ -459,7 +459,7 @@ class HomeActivity : ThreemaAppCompatActivity(), SMSVerificationDialogCallback, 
                 threemaSafeService.storeMasterKey(masterKey)
                 preferenceService.setThreemaSafeServerInfo(mdmConfig.getServerInfo())
                 threemaSafeService.setEnabled(true)
-                threemaSafeService.uploadNow(true)
+                threemaSafeService.uploadNow()
             } else {
                 showToast(R.string.safe_error_preparing, ToastDuration.LONG)
             }

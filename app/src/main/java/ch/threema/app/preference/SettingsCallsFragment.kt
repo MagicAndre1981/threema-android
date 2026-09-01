@@ -41,7 +41,6 @@ class SettingsCallsFragment : ThreemaPreferenceFragment() {
     private lateinit var groupCallsEnable: CheckBoxPreference
 
     override fun initializePreferences() {
-        super.initializePreferences()
         initCallPrefListeners()
         initWorkRestrictions()
         initEnableCallRejectPref()

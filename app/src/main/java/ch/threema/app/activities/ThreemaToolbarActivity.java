@@ -46,6 +46,7 @@ public abstract class ThreemaToolbarActivity extends ThreemaActivity {
 
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
+    @Nullable
     private View connectionIndicator;
 
     @NonNull
@@ -159,6 +160,7 @@ public abstract class ThreemaToolbarActivity extends ThreemaActivity {
         return this.toolbar;
     }
 
+    @Nullable
     protected View getConnectionIndicator() {
         return connectionIndicator;
     }

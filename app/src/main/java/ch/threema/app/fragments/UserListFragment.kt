@@ -8,6 +8,7 @@ import ch.threema.app.R
 import ch.threema.app.ThreemaApplication
 import ch.threema.app.activities.AddContactActivity
 import ch.threema.app.adapters.UserListAdapter
+import ch.threema.app.di.awaitAppFullyReady
 import ch.threema.app.preference.service.PreferenceService
 import ch.threema.app.services.BlockedIdentitiesService
 import ch.threema.app.services.ContactService
@@ -28,13 +29,13 @@ class UserListFragment : RecipientListFragment() {
 
     override fun isMultiSelectAllowed(): Boolean = multiSelect || multiSelectIdentity
 
-    override fun getBundleName(): String = "UserListState"
+    override fun getBundleName() = "UserListState"
 
-    override fun getEmptyText(): Int = R.string.no_matching_contacts
+    override fun getEmptyText() = R.string.no_matching_contacts
 
-    override fun getAddIcon(): Int = R.drawable.ic_person_add_outline
+    override fun getAddIcon() = R.drawable.ic_person_add_outline
 
-    override fun getAddText(): Int = R.string.menu_add_contact
+    override fun getAddText() = R.string.menu_add_contact
 
     override fun getAddIntent(): Intent = buildActivityIntent<AddContactActivity>(requireActivity()) {
         putExtra(AddContactActivity.EXTRA_ADD_BY_ID, true)
@@ -43,14 +44,16 @@ class UserListFragment : RecipientListFragment() {
     @SuppressLint("StaticFieldLeak")
     override fun createListAdapter(checkedItemPositions: ArrayList<Int>?) {
         lifecycleScope.launch {
-            val contactModels = withContext(dispatcherProvider.worker) {
+            awaitAppFullyReady()
+
+            val contactModels = withContext(dispatcherProvider.io) {
                 if (ConfigUtils.isWorkBuild()) {
                     // Excluding invalid and work contacts
                     contactService
                         .getAllDisplayed(ContactService.ContactSelection.EXCLUDE_INVALID)
                         .filterNot { contactModel -> contactModel.isWorkVerified }
                 } else {
-                    // Excluding invalid contacts because they cannot receive messages anyways
+                    // Excluding invalid contacts because they cannot receive messages anyway
                     contactService.getAllDisplayed(ContactService.ContactSelection.EXCLUDE_INVALID)
                 }
             }

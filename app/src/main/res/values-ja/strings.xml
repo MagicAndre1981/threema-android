@@ -226,6 +226,7 @@
     <string name="prefs_header_other">その他</string>
     <string name="an_error_occurred">エラーが発生しました</string>
     <string name="an_error_occurred_more">エラーが発生しました: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">賛成</string>
     <string name="decline">反対</string>
     <string name="forward_message">メッセージを転送する</string>

@@ -46,4 +46,14 @@
     <color name="availability_status_icon_busy">#F6A421</color>
     <color name="availability_status_container_busy">#56480D</color>
     <color name="availability_status_on_container_busy">#FFFFFF</color>
+
+    <!-- Home Screen Widget -->
+    <!-- We need to define them here, as a remote view cannot resolve ?attr/ references -->
+    <color name="widget_color_primary">@color/md_theme_dark_primary</color>
+    <color name="widget_color_on_primary">@color/md_theme_dark_onPrimary</color>
+    <color name="widget_color_surface_container_low">@color/md_theme_dark_surfaceContainerLow</color>
+    <color name="widget_color_on_surface">@color/md_theme_dark_onSurface</color>
+    <color name="widget_color_background">@color/md_theme_dark_background</color>
+    <color name="widget_color_on_background">@color/md_theme_dark_onBackground</color>
+
 </resources>

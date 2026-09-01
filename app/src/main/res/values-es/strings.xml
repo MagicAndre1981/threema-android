@@ -239,6 +239,8 @@
     <string name="prefs_header_other">Más</string>
     <string name="an_error_occurred">Se ha producido un error</string>
     <string name="an_error_occurred_more">Se ha producido un error: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="startup_error_details">No se ha podido abrir ${app_name_short} por un error inesperado. Exporte el archivo de registro a continuación y contacte con nuestro equipo de asistencia para que podamos investigar el problema. Lamentamos las molestias ocasionadas.</string>
     <string name="acknowledge">Confirmar</string>
     <string name="decline">Rechazar</string>
     <string name="forward_message">Reenviar</string>

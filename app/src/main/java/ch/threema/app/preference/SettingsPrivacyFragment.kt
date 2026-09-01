@@ -99,8 +99,6 @@ class SettingsPrivacyFragment :
         }
 
     override fun initializePreferences() {
-        super.initializePreferences()
-
         disableScreenshot = getPref(synchronizedSettingsService.getScreenshotPolicySetting().preferenceKey)
         disableScreenshotChecked = this.disableScreenshot.isChecked
 

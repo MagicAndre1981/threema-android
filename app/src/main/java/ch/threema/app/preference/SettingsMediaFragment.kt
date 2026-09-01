@@ -27,14 +27,9 @@ class SettingsMediaFragment : ThreemaPreferenceFragment() {
     private val appRestrictions: AppRestrictions by inject()
 
     override fun initializePreferences() {
-        super.initializePreferences()
-
         initAutoDownloadPref()
-
         initMediaPref()
-
         initSaveMediaPref()
-
         initDownloadPref()
     }
 

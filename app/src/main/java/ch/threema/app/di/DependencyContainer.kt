@@ -47,7 +47,6 @@ import ch.threema.data.repositories.GroupModelRepository
 import ch.threema.domain.protocol.api.APIConnector
 import ch.threema.domain.protocol.connection.ServerConnection
 import ch.threema.domain.stores.DHSessionStore
-import ch.threema.domain.stores.IdentityStore
 import ch.threema.domain.taskmanager.TaskManager
 import ch.threema.storage.factories.ContactModelFactory
 import ch.threema.storage.factories.WebClientSessionModelFactory
@@ -83,7 +82,6 @@ class DependencyContainer : KoinComponent {
     val groupModelRepository: GroupModelRepository by inject()
     val groupService: GroupService by inject()
     val identityProvider: IdentityProvider by inject()
-    val identityStore: IdentityStore by inject()
     val licenseService: LicenseService<*> by inject()
     val lifetimeService: LifetimeService by inject()
     val localeService: LocaleService by inject()

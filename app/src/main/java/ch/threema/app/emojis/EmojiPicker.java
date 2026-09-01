@@ -432,7 +432,8 @@ public class EmojiPicker extends LinearLayout implements EmojiSearchWidget.Emoji
     }
 
     public boolean isEmojiSearchShown() {
-        return emojiSearchWidget.isShown();
+        var emojiSearchWidget = this.emojiSearchWidget;
+        return emojiSearchWidget != null && emojiSearchWidget.isShown();
     }
 
     public interface EmojiPickerListener {

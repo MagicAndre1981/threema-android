@@ -14,7 +14,6 @@ import ch.threema.app.voip.groupcall.sfu.connection.GroupCallConnectionState
 import ch.threema.app.voip.groupcall.sfu.connection.Joining
 import ch.threema.app.voip.groupcall.sfu.messages.P2PMessageContent
 import ch.threema.app.voip.groupcall.sfu.webrtc.RemoteCtx
-import ch.threema.base.ThreemaException
 import ch.threema.base.utils.getThreemaLogger
 import ch.threema.domain.types.Identity
 import java.lang.Runnable
@@ -26,6 +25,8 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flowOf
 import org.webrtc.EglBase
 
 private val logger = getThreemaLogger("GroupCallControllerImpl")
@@ -101,18 +102,24 @@ internal class GroupCallControllerImpl(
     private lateinit var localParticipant: LocalParticipant
 
     override val participants: Flow<Set<Participant>>
-        get() = ifCallIsRunning {
+        get() = if (callLeftSignal.isCompleted) {
+            flowOf(emptySet())
+        } else {
             logger.trace("Get participants")
             mutableParticipants.asSharedFlow()
         }
 
     override val captureStateUpdates: Flow<Unit>
-        get() = ifCallIsRunning {
+        get() = if (callLeftSignal.isCompleted) {
+            emptyFlow()
+        } else {
             mutableUpdateCaptureState.asSharedFlow()
         }
 
     override val screenShareActivated: Flow<Unit>
-        get() = ifCallIsRunning {
+        get() = if (callLeftSignal.isCompleted) {
+            emptyFlow()
+        } else {
             mutableScreenShareActivated.asSharedFlow()
         }
 
@@ -339,7 +346,7 @@ internal class GroupCallControllerImpl(
     @AnyThread
     private fun <T> ifCallIsRunning(supplier: () -> T): T {
         return if (callLeftSignal.isCompleted) {
-            throw ThreemaException("Call has already ended")
+            throw GroupCallController.CallAlreadyEndedException()
         } else {
             supplier()
         }
@@ -348,7 +355,7 @@ internal class GroupCallControllerImpl(
     @AnyThread
     private suspend fun <T> suspendingIfCallIsRunning(supplier: suspend () -> T): T {
         return if (callLeftSignal.isCompleted) {
-            throw ThreemaException("Call has already ended")
+            throw GroupCallController.CallAlreadyEndedException()
         } else {
             supplier()
         }

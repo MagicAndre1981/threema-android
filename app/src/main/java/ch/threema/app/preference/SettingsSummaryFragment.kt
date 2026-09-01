@@ -30,6 +30,7 @@ import ch.threema.app.asynctasks.ContactCreated
 import ch.threema.app.asynctasks.ContactModified
 import ch.threema.app.asynctasks.ContactResult
 import ch.threema.app.backupcenter.BackupCenterActivity
+import ch.threema.app.di.awaitAppFullyReady
 import ch.threema.app.dialogs.BottomSheetAbstractDialog.BottomSheetDialogCallback
 import ch.threema.app.dialogs.BottomSheetGridDialog
 import ch.threema.app.dialogs.GenericAlertDialog
@@ -98,16 +99,20 @@ class SettingsSummaryFragment : ThreemaPreferenceFragment(), GenericAlertDialog.
             getPref<Preference>(prefKey).summary = summary
         }
 
-        setUpAppSettingsSection()
-        setUpBackupCenter()
-        setUpLinkedDevicesSection()
-        setUpCommunityAndSharingSection()
-        setUpAdvancedSection()
-        setUpPromotionalSection()
-        setUpReferralBanner()
+        lifecycleScope.launch {
+            awaitAppFullyReady()
 
-        if (ConfigUtils.isTabletLayout()) {
-            selectActivePreference()
+            setUpAppSettingsSection()
+            setUpBackupCenter()
+            setUpLinkedDevicesSection()
+            setUpCommunityAndSharingSection()
+            setUpAdvancedSection()
+            setUpPromotionalSection()
+            setUpReferralBanner()
+
+            if (ConfigUtils.isTabletLayout()) {
+                selectActivePreference()
+            }
         }
     }
 

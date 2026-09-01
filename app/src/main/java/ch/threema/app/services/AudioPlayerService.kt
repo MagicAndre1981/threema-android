@@ -1,5 +1,6 @@
 package ch.threema.app.services
 
+import android.content.Intent
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.C.AudioContentType
@@ -78,6 +79,15 @@ class AudioPlayerService : MediaSessionService() {
         }
         logger.info("Created media session")
     }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int =
+        try {
+            super.onStartCommand(intent, flags, startId)
+        } catch (e: Exception) {
+            logger.error("Foreground service start did not work, stopping self", e)
+            stopSelf()
+            START_NOT_STICKY
+        }
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession? {
         // Only allow media controllers from our own app to connect to this media session

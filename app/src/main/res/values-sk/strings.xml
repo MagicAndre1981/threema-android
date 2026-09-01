@@ -242,6 +242,7 @@ alebo naskenovať QR kód pomocou iného zariadenia.</string>
     <string name="prefs_header_other">Iné</string>
     <string name="an_error_occurred">Vyskytla sa chyba</string>
     <string name="an_error_occurred_more">Vyskytla sa chyba: “%1$s”</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Súhlasím</string>
     <string name="decline">Nesúhlasím</string>
     <string name="forward_message">Preposlať správu</string>

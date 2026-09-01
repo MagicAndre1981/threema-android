@@ -33,7 +33,7 @@ if (gradle.startParameter.taskRequests.toString().contains("Hms")) {
 /**
  * Only use the scheme "<major>.<minor>.<patch>" for the appVersion
  */
-val appVersion = "6.5.1"
+val appVersion = "6.5.2"
 
 /**
  * betaSuffix with leading dash (e.g. `-beta1`).
@@ -42,7 +42,7 @@ val appVersion = "6.5.1"
  */
 val betaSuffix = ""
 
-val defaultVersionCode = 1210
+val defaultVersionCode = 1212
 
 /**
  * Map with keystore paths (if found).
@@ -79,7 +79,11 @@ android {
         setProductNames(
             appName = "Threema",
         )
+
+        stringBuildConfigField("BASE_VERSION_NAME", appVersion)
         intBuildConfigField("DEFAULT_VERSION_CODE", defaultVersionCode)
+        stringBuildConfigField("VERSION_NAME_BETA_SUFFIX", betaSuffix)
+
         // package name used for sync adapter - needs to match mime types below
         stringResValue("package_name", applicationId!!)
         stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.$applicationId.profile")

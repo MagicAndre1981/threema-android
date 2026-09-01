@@ -65,8 +65,8 @@ private fun UnexpectedErrorState(
     onClickExportLogs: () -> Unit,
 ) {
     ErrorState(
-        message = stringResource(R.string.an_error_occurred),
-        details = errorCodes.joinToString(),
+        message = stringResource(R.string.an_error_occurred_more, errorCodes.joinToString()),
+        details = stringResource(R.string.startup_error_details),
     ) {
         ButtonPrimary(
             modifier = Modifier.fillMaxWidth(),
@@ -164,10 +164,8 @@ fun ErrorState(
             Spacer(modifier = Modifier.height(GridUnit.x2))
             ThemedText(
                 text = details,
-                maxLines = 2,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyMedium,
-                overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }

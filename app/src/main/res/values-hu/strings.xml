@@ -222,6 +222,7 @@
     <string name="prefs_header_other">További</string>
     <string name="an_error_occurred">Hiba történt</string>
     <string name="an_error_occurred_more">Hiba történt: «%1$s»</string>
+    <!-- Error message shown to the user if the app fails to start. ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
     <string name="acknowledge">Megerősítés</string>
     <string name="decline">Visszautasítás</string>
     <string name="forward_message">Előre</string>

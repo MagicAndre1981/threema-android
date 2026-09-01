@@ -53,12 +53,18 @@
     <string name="voip_prefs_video_codec_no_h264hip">Деактивирайте H264-HiP</string>
     <string name="voip_prefs_video_codec_sw">Софтуерни кодеци</string>
     <string name="voip_connection_failed">Връзката не може да бъде осъществена</string>
+    <string name="voip_call_disconnected">Обаждането прекъсна</string>
     <string name="prefs_voip_reject_incoming_calls_title">Отклонете мобилните обаждания</string>
     <string name="prefs_voip_reject_incoming_calls_summary">Отклонете мобилните обаждания докато има активно обаждане по Threema.</string>
     <string name="voip_contact_not_found">Няма Threema контакт за този номер.</string>
     <string name="voip_another_pstn_call">Не може да се осъществи обаждане. Има активно мобилно обаждане.</string>
     <string name="voip_call_status_off_hours">Обаждане в неработно време</string>
     <string name="voip_peer_video_disabled">Събеседникът деактивира видео разговора.</string>
+    <string name="voip_error_processing_call_anser">Грешка при обработването на обаждането</string>
+    <string name="voip_error_peer_connection">Грешка в Peer връзката</string>
+    <string name="voip_error_determine_common_video_quality_profile">Не може да се определи общ профил на видео качеството</string>
+    <string name="voip_audio_focus_lost">Звуковият фокус е изгубен</string>
+    <string name="voip_could_not_initialize">Обаждането не може да се стартира</string>
     <!-- WebRTC debugger -->
     <string name="voip_prefs_webrtc_debug">WebRTC Диагностика</string>
     <string name="voip_prefs_webrtc_debug_summary">Стартирайте този инструмент, за да дебъгнете проблеми със започването на обаждане</string>

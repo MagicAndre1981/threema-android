@@ -77,7 +77,7 @@ class SentryService(
         val event = Event(
             eventId = record.id.format(),
             timestamp = record.createdAt.toString(),
-            release = metaInfo.appVersion,
+            release = metaInfo.release,
             dist = metaInfo.versionCode.toString(),
             tags = Tags(
                 androidVersion = metaInfo.androidSdkVersion.toString(),
@@ -239,10 +239,14 @@ class SentryService(
         val publicApiKey: String,
     )
 
+    /**
+     * @param release Must be unique across all Sentry projects, as specified by Sentry's documentation.
+     * See https://develop.sentry.dev/sdk/foundations/envelopes/event-payloads/
+     */
     data class MetaInfo(
         val deviceModel: String,
         val androidSdkVersion: Int,
-        val appVersion: String,
+        val release: String,
         val versionCode: Int,
         val buildFlavor: String,
     )

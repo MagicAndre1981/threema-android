@@ -1,6 +1,8 @@
 package ch.threema.app.webviews
 
 import android.content.Context
+import android.os.Bundle
+import androidx.core.view.isInvisible
 import ch.threema.android.buildActivityIntent
 import ch.threema.app.R
 import ch.threema.app.utils.ConfigUtils
@@ -14,6 +16,13 @@ class PrivacyPolicyActivity : SimpleWebViewActivity() {
         logScreenVisibility(logger)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (intent.extras?.getBoolean(HIDE_CONNECTION_INDICATOR, false) == true) {
+            connectionIndicator?.isInvisible = true
+        }
+    }
+
     override fun getWebViewTitle() = R.string.privacy_policy
 
     override fun getWebViewUrl(isDarkTheme: Boolean) = ConfigUtils.getPrivacyPolicyURL(
@@ -24,11 +33,11 @@ class PrivacyPolicyActivity : SimpleWebViewActivity() {
     )
 
     companion object {
+        private const val HIDE_CONNECTION_INDICATOR = "hideConnectionIndicator"
+
         @JvmStatic
-        fun createIntent(context: Context, forceDarkTheme: Boolean = false) = buildActivityIntent<PrivacyPolicyActivity>(context) {
-            if (forceDarkTheme) {
-                putExtra(FORCE_DARK_THEME, true)
-            }
+        fun createIntent(context: Context, hideConnectionIndicator: Boolean = false) = buildActivityIntent<PrivacyPolicyActivity>(context) {
+            putExtra(HIDE_CONNECTION_INDICATOR, hideConnectionIndicator)
         }
     }
 }

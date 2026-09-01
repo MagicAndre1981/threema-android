@@ -255,16 +255,24 @@ class GroupCallViewModel(
 
     @UiThread
     fun muteMicrophone(muted: Boolean) {
-        logger.trace("Mute {}", muted)
-        callController.microphoneActive = !muted
-        microphoneActive.postValue(callController.microphoneActive)
+        try {
+            logger.trace("Mute {}", muted)
+            callController.microphoneActive = !muted
+            microphoneActive.postValue(callController.microphoneActive)
+        } catch (_: GroupCallController.CallAlreadyEndedException) {
+            return
+        }
         triggerCaptureStateUpdate()
     }
 
     @UiThread
     fun muteCamera(muted: Boolean) {
-        callController.cameraActive = !muted
-        cameraActive.postValue(callController.cameraActive)
+        try {
+            callController.cameraActive = !muted
+            cameraActive.postValue(callController.cameraActive)
+        } catch (_: GroupCallController.CallAlreadyEndedException) {
+            return
+        }
         triggerCaptureStateUpdate()
         // If camera is turned on, then don't use earpiece as output anymore as it is not convenient
         if (!muted && selectedAudioDevice.value == AudioDevice.EARPIECE) {
@@ -273,12 +281,13 @@ class GroupCallViewModel(
         }
     }
 
-    @UiThread
-    fun flipCamera() {
-        viewModelScope.launch {
+    fun flipCamera() = viewModelScope.launch {
+        try {
             callController.flipCamera()
-            cameraFlipEvents.postValue(Unit)
+        } catch (_: GroupCallController.CallAlreadyEndedException) {
+            return@launch
         }
+        cameraFlipEvents.postValue(Unit)
     }
 
     fun hasOtherJoinedCall(call: GroupCallDescription): Boolean {
